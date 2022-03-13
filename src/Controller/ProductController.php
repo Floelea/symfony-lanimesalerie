@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'product')]
+    #[Route('/product', name: 'product')]
     public function index(ProductRepository $repo,PaginatorInterface $paginator, Request $request): Response
     {
         $products = $paginator->paginate(
             $repo->findAll(),
             $request->query->getInt('page',1),
-            10
+            4
         );
         return $this->render('product/index.html.twig', [
             'products' => $products,

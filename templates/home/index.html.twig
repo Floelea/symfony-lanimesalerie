@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <hr class="mt-0" />
+            <section class="navbarAnimals container">
+                <ul class="m-0 d-flex align-items-center">
+                    <li><a href="#">Chien</a></li>
+
+                    <li><a href="#">Chat</a></li>
+
+                    <li><a href="#">Oiseaux</a></li>
+
+                    <li><a href="#">Poissons</a></li>
+
+                    <li><a href="#">Reptiles</a></li>
+
+                    <li><a href="#">Rongeurs</a></li>
+
+                    <li><a href="#">Elevages</a></li>
+                </ul>
+            </section>
+    <hr class="mb-0" />
+
+
+    <div class="pictureUnderNavbarAnimals mt-5">
+        <h1 class="text-center">La Nîmesalerie</h1>
+    </div>
+
+    <div class="textAnimesalerie text-center mt-3">
+        <p>Comme vous, nous sommes attentionnés et passionnés par les animaux. Nos spécialistes en animalerie vous conseillent et vous transmettent leur passion en sélectionnant pour votre animal des produits adaptés à ses besoins : chiens, chats, oiseaux, rongeurs, reptiles, poissons, poulailler... L'anîmesalerie en ligne vous accompagne au quotidien pour garantir le bien-être de vos animaux.</p>
+    </div>
+
+    {% for product in products %}
+        <p>{{ product.name }}</p>
+        <i class="fa-brands fa-symfony"></i>
+    {% endfor %}
+
+{% endblock %}

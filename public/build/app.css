@@ -1,15 +1,109 @@
-
-
-p{
-    font-size: 10px;
+/*CLASSE GLOBAL*/
+.container {
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0;
+}
+body a {
+    text-decoration: none;
+}
+body li {
+    list-style: none;
 }
 
-i{
-    color: red;
+/*****************************START NAV**********************************/
+
+/*****NAV BAR STAY UP******/
+nav {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 9999;
 }
 nav img {
-    height: 130px;
-    width: 180px;
+    height: 120px;
+    width: 170px;
     object-fit: cover;
 }
+nav i {
+    color: rgb(144, 92, 76);
+}
+nav input {
+    width: 220px;
+}
+nav ul .searchSite .searchBar {
+    border: 1px solid rgba(0, 0, 0, 0.205);
+    padding: 1px 8px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.searchBar input:focus {
+    outline: none;
+}
+.searchBar input::placeholder {
+    font-size: 12px;
+}
+.searchBar i {
+    font-size: 17px;
+}
+/*******SIZE LOGO CONNECT/SIGNIN/BASKET*********/
+.signIn i,.basket i,.findUs i {
+    padding-right: 10px;
+    font-size: 20px;
+}
+/********FONT-SIZE CONNECT/CONNECT/BASKET*************/
+.signIn p,.basket p,.findUs p{
+    font-size: 12px;
+}
+/*****************************END NAV**********************************/
+
+
+/***********************************
+            NAVBAR ANIMALS
+************************************/
+
+.navbarAnimals ul li {
+    width: calc(100% / 7);
+    text-align: center;
+}
+.navbarAnimals ul li a {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/***********************************
+            PHOTO SOUS HEADER
+************************************/
+
+.pictureUnderNavbarAnimals {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.337), rgba(0, 0, 0, 0.337)),
+    url("/img/dog-4494554_1920.jpg");
+    background-size: 110%;
+    height: 350px;
+    background-position: 90% 30%;
+    text-align: center;
+    padding-bottom: 300px;
+}
+
+.pictureUnderNavbarAnimals h1 {
+    font-family: Kurale, serif;
+    font-weight: bold;
+    font-size: 60px;
+    color: white;
+    position: relative;
+    padding-top: 100px;
+    display: inline-block;
+}
+
+.textAnimesalerie{
+    font-family: Kurale, serif;
+}
+
+
+
+
+
+
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOztBQUVBO0lBQ0ksZUFBZTtBQUNuQixDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXNzZXRzL3N0eWxlcy9hcHAuY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIlxuXG5we1xuICAgIGZvbnQtc2l6ZTogNTBweDtcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/
