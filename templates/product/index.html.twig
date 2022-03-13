@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+    {% for product in products %}
+        <p>{{ product.name }}</p>
+        <i class="fa-brands fa-symfony"></i>
+    {% endfor %}
+    {{ knp_pagination_render(products) }}
+{% endblock %}
