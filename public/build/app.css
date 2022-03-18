@@ -20,6 +20,12 @@ body li {
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.5);
     font-weight: bolder;
 }
+@font-face {
+    font-family: "space age";
+    src: url("/build/font/spaceage.ttf") format("truetype");
+}
+
+
 /*****************************START NAV**********************************/
 
 /*****NAV BAR STAY UP******/
@@ -208,13 +214,27 @@ font-size: 14px;
     url("/img/photo-1535930749574-1399327ce78f.jpg");
     background-position: center;
     background-size: cover;
-    padding-top: 500px;
+    padding-top: 300px;
 }
 .newsProducts {
     background-image: linear-gradient(rgba(0, 0, 0, 0.337), rgba(0, 0, 0, 0.337)),
     url("/img/animaux-surprise-4.jpg");
     background-position: center;
     background-size: cover;
-    padding-top: 500px;
+    padding-top: 300px;
+}
+.space {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.337), rgba(0, 0, 0, 0.337)),
+    url("/img/AnimalsThroughTimeM8-Thumbnail-1920x1080.jpg");
+    background-position: center;
+    background-size: cover;
+    padding-bottom: 500px;
+    position: relative;
+}
+.spacePicture h3{
+    font-family: "space age";
+    position: absolute;
+    bottom: 320px;
+    left: 35px;
 }
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOztBQUVBO0lBQ0ksZUFBZTtBQUNuQixDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXNzZXRzL3N0eWxlcy9hcHAuY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIlxuXG5we1xuICAgIGZvbnQtc2l6ZTogNTBweDtcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/
