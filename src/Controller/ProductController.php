@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +20,32 @@ class ProductController extends AbstractController
         $products = $paginator->paginate(
             $repo->findAll(),
             $request->query->getInt('page',1),
-            4
+            10
         );
         return $this->render('product/index.html.twig', [
             'products' => $products,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/new/product",name="new_product")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function new(Request $request,EntityManagerInterface $manager)
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductType::class,$product);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $product->setCreatedAt(new \DateTime());
+            $manager->persist($product);
+            $manager->flush();
+            return $this->redirectToRoute('product');
+        }
+        return $this->renderForm('product/new.html.twig',[
+            'formProduct'=>$form
         ]);
     }
 }

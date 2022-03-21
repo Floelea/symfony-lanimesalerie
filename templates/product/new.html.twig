@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% form_theme formProduct 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    <h1>Register</h1>
+
+    {{ form_start(formProduct) }}
+    {{ form_row(formProduct.name) }}
+    {{ form_row(formProduct.description) }}
+    {{ form_row(formProduct.priceHt) }}
+    {{ form_row(formProduct.imageFile) }}
+
+
+    <button type="submit" class="btn btn-success">Register</button>
+    {{ form_end(formProduct) }}
+{% endblock %}

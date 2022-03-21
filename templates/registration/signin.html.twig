@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connect{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row registerSignin mt-5">
+            <div class="col-6 signIn p-0">
+                <h5 class="mb-5">J'ai déjà un compte</h5>
+                <form action="{{ path('signin') }}" method="post" class="container m-0">
+                    <div class="form-group mb-3 ">
+
+                        <input type="text" name="_username" class="form-control" placeholder="Username" id="inputDefault">
+                    </div>
+                    <div class="form-group mb-3">
+
+                        <input type="password" name="_password" class="form-control" placeholder="Password" id="inputDefault">
+                    </div>
+                    <button type="submit" class="btn btn-info">Me connecter</button>
+                </form>
+            </div>
+            <div class="col-6 register d-flex flex-column">
+                <h5 class="text-center mb-5">Vous n'avez pas de compte</h5>
+                <a href="{{ path('register') }}" class="text-center btn btn-info">Créer votre compte</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -209,6 +209,7 @@ font-size: 14px;
 .carousel-item h3 {
     margin: 30px 0 30px 0;
 }
+/**************DOUBLE CARDS NEWS AND PROMOS*************/
 .smartPrice {
     background-image: linear-gradient(rgba(0, 0, 0, 0.337), rgba(0, 0, 0, 0.337)),
     url("/img/photo-1535930749574-1399327ce78f.jpg");
@@ -223,6 +224,7 @@ font-size: 14px;
     background-size: cover;
     padding-top: 300px;
 }
+/**************SPACE*************/
 .space {
     background-image: linear-gradient(rgba(0, 0, 0, 0.337), rgba(0, 0, 0, 0.337)),
     url("/img/AnimalsThroughTimeM8-Thumbnail-1920x1080.jpg");
@@ -237,4 +239,5 @@ font-size: 14px;
     bottom: 320px;
     left: 35px;
 }
+
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOztBQUVBO0lBQ0ksZUFBZTtBQUNuQixDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXNzZXRzL3N0eWxlcy9hcHAuY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIlxuXG5we1xuICAgIGZvbnQtc2l6ZTogNTBweDtcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

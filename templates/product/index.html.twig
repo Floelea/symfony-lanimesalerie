@@ -5,7 +5,7 @@
 {% block body %}
     {% for product in products %}
         <p>{{ product.name }}</p>
-        <i class="fa-brands fa-symfony"></i>
+        <img src="{{ vich_uploader_asset(product,'imageFile') }}" alt="">
     {% endfor %}
 {#    {{ knp_pagination_render(products) }}#}
 {% endblock %}

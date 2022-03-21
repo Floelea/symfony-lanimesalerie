@@ -16,8 +16,6 @@ class AppFixtures extends Fixture
             $product = new Product();
             $product->setPriceHt(mt_rand(10, 100));
             $product->setName($faker->title);
-            $product->setMark($faker->company);
-            $product->setReference($faker->title);
             $product->setDescription($faker->title);
             $manager->persist($product);
         }
