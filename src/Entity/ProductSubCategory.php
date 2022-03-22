@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AnimalCategoryRepository;
+use App\Repository\ProductSubCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AnimalCategoryRepository::class)]
-class AnimalCategory
+#[ORM\Entity(repositoryClass: ProductSubCategoryRepository::class)]
+class ProductSubCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,11 @@ class AnimalCategory
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'animalCategory', targetEntity: product::class, orphanRemoval: true)]
+    #[ORM\ManyToOne(targetEntity: ProductCategory::class, inversedBy: 'productSubCategory')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $productCategory;
+
+    #[ORM\OneToMany(mappedBy: 'productSubCategory', targetEntity: product::class, orphanRemoval: true)]
     private $product;
 
     public function __construct()
@@ -43,6 +47,18 @@ class AnimalCategory
         return $this;
     }
 
+    public function getProductCategory(): ?ProductCategory
+    {
+        return $this->productCategory;
+    }
+
+    public function setProductCategory(?ProductCategory $productCategory): self
+    {
+        $this->productCategory = $productCategory;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, product>
      */
@@ -55,7 +71,7 @@ class AnimalCategory
     {
         if (!$this->product->contains($product)) {
             $this->product[] = $product;
-            $product->setAnimalCategory($this);
+            $product->setProductSubCategory($this);
         }
 
         return $this;
@@ -65,8 +81,8 @@ class AnimalCategory
     {
         if ($this->product->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getAnimalCategory() === $this) {
-                $product->setAnimalCategory(null);
+            if ($product->getProductSubCategory() === $this) {
+                $product->setProductSubCategory(null);
             }
         }
 

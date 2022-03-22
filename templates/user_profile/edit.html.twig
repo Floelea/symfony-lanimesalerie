@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% form_theme formUserEdit 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    <h1>Register</h1>
+
+        {{ form_start(formUserEdit) }}
+        {{ form_row(formUserEdit.username) }}
+        {{ form_row(formUserEdit.password) }}
+        {{ form_row(formUserEdit.name) }}
+        {{ form_row(formUserEdit.lastName) }}
+        {{ form_row(formUserEdit.birthDay) }}
+{#        {{ form_row(formUserEdit.address) }}#}
+        <button type="submit" class="btn btn-info">Register</button>
+        {{ form_end(formUserEdit) }}
+{% endblock %}

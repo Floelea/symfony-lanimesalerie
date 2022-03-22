@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% form_theme formSubCategory 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    <h1>Register</h1>
+
+    {{ form_start(formSubCategory) }}
+    {{ form_row(formSubCategory.productCategory) }}
+    {{ form_row(formSubCategory.name) }}
+    <button type="submit" class="btn btn-success">Register</button>
+    {{ form_end(formSubCategory) }}
+{% endblock %}

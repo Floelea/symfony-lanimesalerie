@@ -1,17 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello UserProfileController!{% endblock %}
-{% form_theme formUserEdit 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
     <h1>Register</h1>
 
-    {{ form_start(formUserEdit) }}
-    {{ form_row(formUserEdit.username) }}
-    {{ form_row(formUserEdit.password) }}
-    {{ form_row(formUserEdit.name) }}
-    {{ form_row(formUserEdit.lastName) }}
-    {{ form_row(formUserEdit.birthDay) }}
-{#    {{ form_row(formUserEdit.address) }}#}
-    <button type="submit" class="btn btn-info">Register</button>
-    {{ form_end(formUserEdit) }}
+    <div class="card border-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">{{ user.username }}</div>
+        <div class="card-body">
+{#            <h4 class="card-title">Primary card title</h4>#}
+            <p class="card-text">Prénom : {{ user.name }}</p>
+            <p class="card-text">Nom de Famille : {{ user.lastName }}</p>
+            <p class="card-text">Date de Naissance : {{ user.birthDay|date('d/m/Y') }}</p>
+            <a href="{{ path('user_edit') }}" class="btn btn-success">Edit User</a>
+            <h5>Adresse :</h5>
+            {% if app.user.address|length == 0 %}
+                <a href={{ path('new_user_address') }} class="btn btn-info">Enregistrez une adresse</a>
+                {% else %}
+
+                    {% for address in  app.user.address%}
+                        <div class="card">
+                            <div>
+                                <p>{{ address.number }} {{ address.street }}</p>
+                            </div>
+                            <div>
+                                <p>{{ address.postalCode }} {{ address.city }}</p>
+                            </div>
+
+                        </div>
+                        <a href="{{ path('userAddress_edit',{id:address.id}) }}" class="btn btn-success">Edit Address</a>
+                    {% endfor %}
+                    <a href={{ path('new_user_address') }} class="btn btn-info">Enregistrez une nouvelle adresse</a>
+
+            {% endif %}
+        </div>
+    </div>
+
+{#    <a href="{{ path('user_edit') }}" class="btn btn-success">Edit User</a>#}
+
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% form_theme formAddressEdit 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    <h1>Register</h1>
+
+    {{ form_start(formAddressEdit) }}
+    {{ form_row(formAddressEdit.number) }}
+    {{ form_row(formAddressEdit.street) }}
+    {{ form_row(formAddressEdit.postalCode) }}
+    {{ form_row(formAddressEdit.city) }}
+    <button type="submit" class="btn btn-success">Register</button>
+    {{ form_end(formAddressEdit) }}
+{% endblock %}

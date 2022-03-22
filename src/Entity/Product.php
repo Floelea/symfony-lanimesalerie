@@ -96,6 +96,18 @@ class Product
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    #[ORM\ManyToOne(targetEntity: productCategory::class, inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $category;
+
+    #[ORM\ManyToOne(targetEntity: ProductSubCategory::class, inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $productSubCategory;
+
+    #[ORM\ManyToOne(targetEntity: AnimalCategory::class, inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $animalCategory;
+
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -148,6 +160,42 @@ class Product
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCategory(): ?productCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?productCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getProductSubCategory(): ?ProductSubCategory
+    {
+        return $this->productSubCategory;
+    }
+
+    public function setProductSubCategory(?ProductSubCategory $productSubCategory): self
+    {
+        $this->productSubCategory = $productSubCategory;
+
+        return $this;
+    }
+
+    public function getAnimalCategory(): ?AnimalCategory
+    {
+        return $this->animalCategory;
+    }
+
+    public function setAnimalCategory(?AnimalCategory $animalCategory): self
+    {
+        $this->animalCategory = $animalCategory;
 
         return $this;
     }

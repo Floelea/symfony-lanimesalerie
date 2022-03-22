@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Form\UserEditType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,21 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserProfileController extends AbstractController
 {
-    #[Route('/user/profile/{id}', name: 'user_profile', priority: 2)]
-    public function index(User $user,Request $request,EntityManagerInterface $manager): Response
+    #[Route('/user/profile', name: 'user_profile')]
+    public function index()
     {
-        if($user == $this->getUser()){
-            $form = $this->createForm(UserEditType::class,$user);
+       return $this->render('user_profile/index.html.twig',[
+           'user'=>$this->getUser()
+           ]);
+    }
+
+    /**
+     * @Route("/user/edit",name="user_edit")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function edit(Request $request, EntityManagerInterface $manager){
+
+            $form = $this->createForm(UserEditType::class,$this->getUser());
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()){
-               $manager->persist($user);
-               $manager->flush();
-               return $this->redirectToRoute('home');
+                $manager->persist($this->getUser());
+                $manager->flush();
+                return $this->redirectToRoute('user_profile');
             }
-            return $this->renderForm('user_profile/index.html.twig', [
+            return $this->renderForm('user_profile/edit.html.twig', [
                 'formUserEdit' => $form,
             ]);
-        }
-        return $this->redirectToRoute('home');
     }
 }
