@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\AnimalCategory;
 use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Entity\ProductSubCategory;
@@ -16,6 +17,10 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('animalCategory',EntityType::class,[
+                'class'=>AnimalCategory::class,
+                'choice_label'=>'name',
+            ])
             ->add('category',EntityType::class,[
                 'class'=>ProductCategory::class,
                 'choice_label'=>'name',

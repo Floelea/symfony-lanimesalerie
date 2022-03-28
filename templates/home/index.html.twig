@@ -44,7 +44,7 @@
 
                 <div class="d-flex align-items-center justify-content-around mb-3">
                     <p class="m-0 priceCard">{{ product.priceHt }}<sup>€</sup></p>
-                    <i class="fa-solid fa-cart-arrow-down basketCard"></i>
+                    <a href="{{ path('cart_add',{id:product.id}) }}"><i class="fa-solid fa-cart-arrow-down basketCard"></i></a>
                 </div>
             </div>
             {% endfor %}

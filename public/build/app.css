@@ -239,5 +239,15 @@ font-size: 14px;
     bottom: 320px;
     left: 35px;
 }
-
+.myCommand,.myCart{
+    border-radius: 25px;
+}
+.myCartTitle,.myCommandTitle{
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    text-align: center;
+    background-color: rgb(144, 92, 76);
+    color: white;
+    font-weight: bold;
+}
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOztBQUVBO0lBQ0ksZUFBZTtBQUNuQixDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXNzZXRzL3N0eWxlcy9hcHAuY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIlxuXG5we1xuICAgIGZvbnQtc2l6ZTogNTBweDtcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+
+    <div class="container myCart">
+        <div class="row m-0 justify-content-between">
+          <div class="col-6 border border-1 p-0 myCart">
+                  <p class="mb-3 py-2 myCartTitle">Mon panier</p>
+              {% for item in cartObject %}
+                  <div class="container p-3">
+                      <div class="row ">
+                          <div class="col-3 pb-3">
+                              <img src="{{ vich_uploader_asset(item.product,'imageFile') }}" alt="" style="width:130px">
+                          </div>
+                          <div class="d-flex flex-column ps-5 col-6">
+                              <p class="">{{ item.product.name }}</p>
+                              <p class="fs-5"><strong class="fw-bold">{{ item.product.priceHt }}<sup>€</sup></strong><thin>/pièce</thin></p>
+                              <div class="d-flex align-items-center">
+                                  <a href="{{ path('cart_add',{id:item.product.id}) }}" class="btn btn-info">+</a>
+                                  <p class="m-0 px-2">{{ item.quantity }}</p>
+                                  <a href="{{ path('cart_remove',{id:item.product.id}) }}" class="btn btn-info">-</a>
+                              </div>
+                          </div>
+                          <div class="col-3 d-flex justify-content-end">
+                              <p class="fw-bold fs-5">{{ item.product.priceHt * item.quantity }}<sup>€</sup></p>
+                          </div>
+                      </div>
+                      <a href="{{ path('cart_removerow',{id:item.product.id}) }}"><i class="fa-regular fa-trash-can"></i>supprimer</a>
+                  </div>
+
+              {% endfor %}
+                
+          </div>
+            <div class="col-4 border border-1 p-0 myCommand">
+                <p class="mb-3 py-2 myCommandTitle">Détails de ma commande</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
