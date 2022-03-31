@@ -17,7 +17,7 @@ class Cart
     private $total;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $session_id;
+    private $sessionId;
 
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
@@ -44,12 +44,12 @@ class Cart
 
     public function getSessionId(): ?string
     {
-        return $this->session_id;
+        return $this->sessionId;
     }
 
-    public function setSessionId(string $session_id): self
+    public function setSessionId(string $sessionId): self
     {
-        $this->session_id = $session_id;
+        $this->sessionId = $sessionId;
 
         return $this;
     }
@@ -66,12 +66,12 @@ class Cart
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?user
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?user $user): self
     {
         $this->user = $user;
 

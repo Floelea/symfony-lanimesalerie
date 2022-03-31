@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\AnimalCategory;
 use App\Repository\AnimalCategoryRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,14 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function find(ProductRepository $repo,AnimalCategoryRepository $animalCategoryRepository): Response
+    public function index(AnimalCategoryRepository $animalCategoryRepository, ProductRepository $productRepository): Response
     {
-        $products = $repo->findAll();
         $categories = $animalCategoryRepository->findAll();
+        $products = $productRepository->findAll();
         return $this->render('home/index.html.twig', [
-            'products' => $products,
-            'categories'=>$categories
+            'categories' => $categories,
+            'products'=>$products
         ]);
     }
-
 }

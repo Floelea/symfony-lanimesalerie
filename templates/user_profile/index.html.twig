@@ -15,7 +15,7 @@
             <a href="{{ path('user_edit') }}" class="btn btn-success">Edit User</a>
             <h5>Adresse :</h5>
             {% if app.user.address|length == 0 %}
-                <a href={{ path('new_user_address') }} class="btn btn-info">Enregistrez une adresse</a>
+                <a href="{{ path('new_user_address') }}" class="btn btn-info">Enregistrez une adresse</a>
                 {% else %}
 
                     {% for address in  app.user.address%}

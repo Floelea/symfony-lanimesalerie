@@ -2,10 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ProductCategory;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\ProductCategory;use Symfony\Component\Form\AbstractType;use Symfony\Component\Form\FormBuilderInterface;use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductCategoryType extends AbstractType
 {

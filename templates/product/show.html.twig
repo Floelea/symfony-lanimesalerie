@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-2 d-flex flex-column productPicture justify-content-center">
+                {% for image in product.images %}
+                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top productPictures my-3" alt="..." style="width:70px">
+                {% endfor %}
+            </div>
+            <div class="col-6">
+                {% for image in product.images %}
+                    {% if loop.first %}
+                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top" alt="...">
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                <p>{{ product.name }}</p>
+                <p>{{ product.priceHt }}<sup>€</sup></p>
+                <p>COULEURS :</p>
+                <div class="d-flex productColor ">
+                    <p>GRIS</p>
+                    <p>NOIR</p>
+                    <p>BLEU</p>
+                    <p>VIOLET</p>
+                </div>
+                <div class="buttonCart py-2 text-center">
+                    <a href="" class="">AJOUTER AU PANIER</a>
+                </div>
+                <div class="d-flex align-items-center my-4 deliveryCart">
+                    <i class="fas fa-check me-3"></i>
+                    <p class="m-0">Livré demain si commandé avant 12h</p>
+                </div>
+                <div class="d-flex align-items-center fraisCart">
+                    <i class="fas fa-check me-3"></i>
+                    <p class="m-0">Frais de ports offerts</p>
+                </div>
+                <p class="pt-4">PARTAGER :</p>
+                <div class="d-flex share">
+                    <i class="fab fa-instagram fs-2 me-2"></i>
+                    <i class="fab fa-facebook-square fs-2 me-2"></i>
+                    <i class="fab fa-pinterest-square fs-2 me-2"></i>
+                    <i class="fab fa-twitter-square fs-2"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container descriptifAvis">
+        <div class="container-onglets">
+            <div class="onglets active" data-anim="1">DESCRIPTIF DU PRODUIT</div>
+            <div class="onglets" data-anim="2">AVIS CLIENTS</div>
+        </div>
+        <div class="container contenu activeContenu" data-anim="1">
+
+        </div>
+        <div class="container contenu" data-anim="2" id="avis">
+
+        </div>
+    </div>
+
+    <script>
+        const onglets = document.querySelectorAll(".onglets");
+        const contenu = document.querySelectorAll(".contenu");
+        let index = 0;
+
+        onglets.forEach((onglet) => {
+            onglet.addEventListener("click", () => {
+                if (onglet.classList.contains("active")) {
+                    return;
+                } else {
+                    onglet.classList.add("active");
+                }
+                index = onglet.getAttribute("data-anim");
+
+                for (let i = 0; i < onglets.length; i++) {
+                    if (onglets[i].getAttribute("data-anim") != index) {
+                        onglets[i].classList.remove("active");
+                    }
+                }
+
+                for (let j = 0; j < contenu.length; j++) {
+                    if (contenu[j].getAttribute("data-anim") == index) {
+                        contenu[j].classList.add("activeContenu");
+                    } else {
+                        contenu[j].classList.remove("activeContenu");
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -18,11 +18,11 @@ class ProductSubCategory
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\ManyToOne(targetEntity: ProductCategory::class, inversedBy: 'productSubCategory')]
+    #[ORM\ManyToOne(targetEntity: ProductCategory::class, inversedBy: 'productSubCategories')]
     #[ORM\JoinColumn(nullable: false)]
     private $productCategory;
 
-    #[ORM\OneToMany(mappedBy: 'productSubCategory', targetEntity: product::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'productSubCategory', targetEntity: Product::class, orphanRemoval: true)]
     private $product;
 
     public function __construct()
@@ -47,12 +47,12 @@ class ProductSubCategory
         return $this;
     }
 
-    public function getProductCategory(): ?ProductCategory
+    public function getProductCategory(): ?productCategory
     {
         return $this->productCategory;
     }
 
-    public function setProductCategory(?ProductCategory $productCategory): self
+    public function setProductCategory(?productCategory $productCategory): self
     {
         $this->productCategory = $productCategory;
 

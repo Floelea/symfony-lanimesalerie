@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrderController!{% endblock %}
+{% form_theme formOrder 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+
+    <div class="container myCart">
+        <div class="row container align-items-start justify-content-between">
+            <div class="col-6 border border-1 p-0 myCart" style="height: auto">
+                <p class="py-2 m-0 myCartTitle">Vos informations</p>
+                <div class="container  p-3">
+                        {{ form_start(formOrder) }}
+
+
+                            <button type="submit" class="btn btn-success">Commander</button>
+                        {{ form_end(formOrder) }}
+
+                </div>
+            </div>
+
+            <div class="col-4 border border-1 p-0 myCommand">
+                <p class="mb-3 py-2 myCommandTitle">Détails de ma commande</p>
+                <h4 class="ps-4">Total: {{ total }}</h4>
+                <hr>
+                {% for item in cartObject %}
+                <div class="d-flex">
+                    <div>
+                        <img src="{{ vich_uploader_asset(item.product.images[0],'imageFile') }}" alt="" style="width:70px">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <p class="">{{ item.product.name }}</p>
+                        <p class="">Sous-total ({{ item.quantity }}) articles : <strong>{{ item.product.priceHt * item.quantity }}</strong><sup>€</sup></p>
+                    </div>
+
+                </div>
+                {% endfor %}
+                <div class="d-flex flex-column align-items-center">
+                    <a href="{{ path('cart') }}" class="btn btn-warning mb-3" style="width: 75%">Modifier mon panier</a>
+                    <a href="{{ path('order') }}" class="btn btn-success" style="width: 75%">Valider ma commande</a>
+                </div>
+                <div class="d-flex justify-content-around fs-1 mt-3">
+                    <i class="fa-brands fa-cc-visa"></i><i class="fa-brands fa-cc-amex"></i><i class="fa-brands fa-cc-mastercard"></i><i class="fa-brands fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

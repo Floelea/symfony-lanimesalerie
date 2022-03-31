@@ -8,6 +8,7 @@ use App\Entity\ProductCategory;
 use App\Entity\ProductSubCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -21,7 +22,7 @@ class ProductType extends AbstractType
                 'class'=>AnimalCategory::class,
                 'choice_label'=>'name',
             ])
-            ->add('category',EntityType::class,[
+            ->add('productCategory',EntityType::class,[
                 'class'=>ProductCategory::class,
                 'choice_label'=>'name',
             ])
@@ -32,7 +33,17 @@ class ProductType extends AbstractType
             ->add('priceHt')
             ->add('name')
             ->add('description')
-            ->add('imageFile',VichImageType::class);
+        ->add('images',CollectionType::class,[
+        'entry_type'=>ImageType::class,
+        'allow_add'=>true,
+        'allow_delete'=>true,
+        'required'=>false,
+        'by_reference'=>false,
+        'disabled'=>false,
+        'prototype'=>true,
+        'label'=>false
+    ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

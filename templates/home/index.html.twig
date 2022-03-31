@@ -3,16 +3,15 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-
     <!------------NAVBAR ANIMALS----------->
     <hr class="mt-0" />
-            <section class="navbarAnimals container">
-                <ul class="m-0 d-flex align-items-center">
-                    {% for categorie in categories %}
-                        <li><a href="#">{{ categorie.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
+    <section class="navbarAnimals container">
+        <ul class="m-0 d-flex align-items-center">
+            {% for categorie in categories %}
+                <li><a href="#">{{ categorie.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
     <hr class="mb-0" />
     <!-------------PICTURE UNDER NAVBAR ANIMALS------------->
     <div class="pictureUnderNavbarAnimals mt-5">
@@ -27,26 +26,29 @@
     <div class="container cardArticle my-5">
         <div class="row m-0">
             {% for product in products %}
-            <div class="col-3 oneArticle p-0">
-                <div class="d-flex justify-content-end">
-                    <a href=""><i class="fa-regular fa-heart p-2 fs-4 likeCard"></i></a>
-                </div>
+                <div class="col-3 oneArticle p-0">
+                    <div class="d-flex justify-content-end">
+                        <a href=""><i class="fa-regular fa-heart p-2 fs-4 likeCard"></i></a>
+                    </div>
 
-                <div class="d-flex justify-content-center mb-3">
-                    <img src="{{ vich_uploader_asset(product,'imageFile') }}" alt="" class="">
-                </div>
+                    {% for image in product.images %}
+                        {% if loop.first %}
+                            <div class="d-flex justify-content-center mb-3">
+                                <a href="{{ path('product_show',{id:product.id}) }}"><img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top" alt="..."></a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <p class="text-center nameCard">{{ product.name }}</p>
+                    <div class="d-flex justify-content-center avisCard align-items-center mb-3">
+                        <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+                        <p class="m-0 ms-3">avis</p>
+                    </div>
 
-                <p class="text-center nameCard">{{ product.name }}</p>
-                <div class="d-flex justify-content-center avisCard align-items-center mb-3">
-                    <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
-                    <p class="m-0 ms-3">avis</p>
+                    <div class="d-flex align-items-center justify-content-around mb-3">
+                        <p class="m-0 priceCard">{{ product.priceHt }}<sup>€</sup></p>
+                        <a href="{{ path('cart_add',{id:product.id}) }}"><i class="fa-solid fa-cart-arrow-down basketCard"></i></a>
+                    </div>
                 </div>
-
-                <div class="d-flex align-items-center justify-content-around mb-3">
-                    <p class="m-0 priceCard">{{ product.priceHt }}<sup>€</sup></p>
-                    <a href="{{ path('cart_add',{id:product.id}) }}"><i class="fa-solid fa-cart-arrow-down basketCard"></i></a>
-                </div>
-            </div>
             {% endfor %}
         </div>
     </div>

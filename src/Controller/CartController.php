@@ -2,20 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Cart;
-use App\Entity\Product;
-
-use App\Repository\ProductRepository;
-use App\Service\CartService;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Cart;use App\Entity\Product;use App\Service\CartService;use Doctrine\ORM\EntityManagerInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\HttpFoundation\Session\SessionInterface;use Symfony\Component\Routing\Annotation\Route;
 
 
 class CartController extends AbstractController
 {
+
+
+
     #[Route('/cart', name: 'cart')]
     public function index(CartService $cartService): Response
     {
@@ -46,7 +40,6 @@ class CartController extends AbstractController
         $cart->setCreatedAt(new \DateTime());
         $manager->persist($cart);
         $manager->flush();
-
         return $this->redirectToRoute('cart');
     }
 
@@ -61,6 +54,7 @@ class CartController extends AbstractController
         if ($product)
         {
             $cartService->removeProduct($product);
+
         }
         return $this->redirectToRoute('cart');
     }
@@ -76,8 +70,20 @@ class CartController extends AbstractController
         if ($product){
             $cartService->removeRow($product);
         }
+        $cartService->removeCart();
         return $this->redirectToRoute('cart');
     }
+
+    /**
+     * @Route("/cart/removeCart",name="cart_removeCart")
+     */
+    public function removeCart(CartService $cartService)
+    {
+        $cartService->removeCart();
+        return $this->redirectToRoute('home');
+    }
+
+
 
 
 }

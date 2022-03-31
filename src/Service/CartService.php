@@ -2,28 +2,27 @@
 
 namespace App\Service;
 
-use App\Entity\Product;
-use App\Repository\CartRepository;
-use App\Repository\ProductRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Entity\Product;use App\Repository\CartRepository;use App\Repository\ProductRepository;use Doctrine\ORM\EntityManagerInterface;use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService
 {
-    private $requestStack;
+    private $session;
     private $repo;
     private $cartRepo;
+    private $manager;
 
-    public function __construct(RequestStack $requestStack,ProductRepository $repo,CartRepository $cartRepo){
-        $this->requestStack=$requestStack;
+    public function __construct(SessionInterface $session,ProductRepository $repo,CartRepository $cartRepo,EntityManagerInterface $manager){
+        $this->session = $session;
         $this->repo=$repo;
         $this->cartRepo=$cartRepo;
+        $this->manager=$manager;
+
     }
 
     public function getCart()
     {
-        $session = $this->requestStack->getSession();
-        $cart=$session->get('cart',[]);
+        $cart=$this->session->get('cart',[]);
         $cartObject=[];
         foreach ($cart as $productId=>$quantity){
             $item=[
@@ -45,47 +44,50 @@ class CartService
     }
 
     public function addProduct(Product $product){
-        $session = $this->requestStack->getSession();
-        $cart = $session->get("cart",[]);
+        $cart = $this->session->get("cart",[]);
         $productId = $product->getId();
         if(isset($cart[$productId])){
             $cart[$productId]++;
         }else{
             $cart[$productId]=1;
         }
-        $session->set("cart",$cart);
+        $this->session->set("cart",$cart);
     }
 
     public function removeProduct(Product $product)
     {
-        $session = $this->requestStack->getSession();
         $productId = $product->getId();
-        $cart = $session->get("cart", []);
+        $cart = $this->session->get("cart", []);
         if(isset($cart[$productId])){
             $cart[$productId]--;
             if($cart[$productId] == 0 ){
                 unset($cart[$productId]);
             }
         }
-        $session->set("cart",$cart );
+        $this->session->set("cart",$cart );
     }
 
     public function removeRow(Product $product)
     {
-        $session = $this->requestStack->getSession();
-        $cart = $session->get('cart',[]);
+        $cart = $this->session->get('cart',[]);
         $productId = $product->getId();
         if (isset($cart[$productId])){
             unset($cart[$productId]);
         }
-        $session->set('cart',$cart);
+        $this->session->set('cart',$cart);
+    }
+
+    public function removeCart()
+    {
+        $this->session->remove('cart');
+        $this->manager->remove($this->isCartInDataBase());
+        $this->manager->flush();
     }
 
     public function countItems()
     {
         $count = 0;
-        $session = $this->requestStack->getSession();
-        $cart = $session->get('cart',[]);
+        $cart = $this->session->get('cart',[]);
         foreach ($cart as $productId=>$quantity){
             $count+=$quantity;
         }
@@ -94,12 +96,11 @@ class CartService
 
     public function getSessionId()
     {
-        $session = $this->requestStack->getSession()->getId();
-        return $session;
+        return $this->session->getId();
     }
 
     public function isCartInDataBase()
     {
-        return $this->cartRepo->findOneBy(['session_id'=>$this->getSessionId()]);
+        return $this->cartRepo->findOneBy(['sessionId'=>$this->getSessionId()]);
     }
 }
