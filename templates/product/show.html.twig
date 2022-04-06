@@ -14,7 +14,7 @@
             <div class="col-6">
                 {% for image in product.images %}
                     {% if loop.first %}
-                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top" alt="...">
+                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top principalPicture" alt="...">
                     {% endif %}
                 {% endfor %}
             </div>
@@ -57,41 +57,10 @@
             <div class="onglets" data-anim="2">AVIS CLIENTS</div>
         </div>
         <div class="container contenu activeContenu" data-anim="1">
-
         </div>
         <div class="container contenu" data-anim="2" id="avis">
-
         </div>
     </div>
 
-    <script>
-        const onglets = document.querySelectorAll(".onglets");
-        const contenu = document.querySelectorAll(".contenu");
-        let index = 0;
 
-        onglets.forEach((onglet) => {
-            onglet.addEventListener("click", () => {
-                if (onglet.classList.contains("active")) {
-                    return;
-                } else {
-                    onglet.classList.add("active");
-                }
-                index = onglet.getAttribute("data-anim");
-
-                for (let i = 0; i < onglets.length; i++) {
-                    if (onglets[i].getAttribute("data-anim") != index) {
-                        onglets[i].classList.remove("active");
-                    }
-                }
-
-                for (let j = 0; j < contenu.length; j++) {
-                    if (contenu[j].getAttribute("data-anim") == index) {
-                        contenu[j].classList.add("activeContenu");
-                    } else {
-                        contenu[j].classList.remove("activeContenu");
-                    }
-                }
-            });
-        });
-    </script>
 {% endblock %}

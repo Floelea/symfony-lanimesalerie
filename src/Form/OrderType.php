@@ -16,7 +16,9 @@ class OrderType extends AbstractType
             ])
            ->add('address',EntityType::class,[
                 'class'=>Address::class,
-                'choice_label'=> 'id'
+                'choice_label'=> function ($address) {
+                    return $address->getMyCustomTypeField();
+                }
             ]);
     }
 

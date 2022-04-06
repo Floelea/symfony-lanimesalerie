@@ -3,15 +3,50 @@
 {% block title %}Register{% endblock %}
 {% form_theme formUserEdit 'bootstrap_5_layout.html.twig' %}
 {% block body %}
-    <h1>Register</h1>
 
-        {{ form_start(formUserEdit) }}
-        {{ form_row(formUserEdit.username) }}
-        {{ form_row(formUserEdit.password) }}
-        {{ form_row(formUserEdit.name) }}
-        {{ form_row(formUserEdit.lastName) }}
-        {{ form_row(formUserEdit.birthDay) }}
-        {{ form_row(formUserEdit.address) }}#}
-        <button type="submit" class="btn btn-info">Register</button>
-        {{ form_end(formUserEdit) }}
+
+{#        {{ form_start(formUserEdit) }}#}
+{#        {{ form_row(formUserEdit.username) }}#}
+{#        {{ form_row(formUserEdit.password) }}#}
+{#        {{ form_row(formUserEdit.name) }}#}
+{#        {{ form_row(formUserEdit.lastName) }}#}
+{#        {{ form_row(formUserEdit.birthDay) }}#}
+{#        {{ form_row(formUserEdit.address) }}#}
+{#        <button type="submit" class="btn btn-info">Register</button>#}
+{#        {{ form_end(formUserEdit) }}#}
+
+    <div class="container userInfo">
+        <div class="row mt-5 container">
+            <div class="col-3 p-0 d-flex flex-column align-items-center">
+                <div class="mt-4">
+                    <a href="{{ path('user_edit') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-user me-2"></i><p class="m-0">Modifier mon profil</p></a>
+                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-address-book me-2"></i><p class="m-0">Mes adresses</p></a>
+                    <a href="" class="d-flex align-items-center m-3"><i class="fa-regular fa-clipboard me-2"></i><p class="m-0">Mes commandes</p></a>
+                </div>
+
+            </div>
+            <div class="col-9 p-0">
+                <div class="bg-white m-4">
+                    <div class="px-4">
+                        <div class="">
+                            <h5 class="pt-2 fw-bold">Modifier mes informations</h5>
+                        </div>
+                        <div class="py-3">
+                                    {{ form_start(formUserEdit) }}
+                                    {{ form_row(formUserEdit.username) }}
+                                    {{ form_row(formUserEdit.name) }}
+                                    {{ form_row(formUserEdit.lastName) }}
+                                    {{ form_row(formUserEdit.birthDay) }}
+                                    <button type="submit" class="btn btn-info">Modifier</button>
+                                    {{ form_end(formUserEdit) }}
+{#                            <p>Username :{{ user.username }}</p>#}
+{#                            <p>Prenom : {{ user.name }}</p>#}
+{#                            <p>Nom : {{ user.lastName }}</p>#}
+{#                            <p>Crée le : {{ user.createdAt|date('d/m/Y') }}</p>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

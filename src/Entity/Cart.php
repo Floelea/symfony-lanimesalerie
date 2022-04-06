@@ -22,8 +22,10 @@ class Cart
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\OneToOne(inversedBy: 'cart', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'cart', targetEntity: User::class, cascade: ['persist'])]
     private $user;
+
+
 
     public function getId(): ?int
     {
@@ -66,15 +68,16 @@ class Cart
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
+
 }

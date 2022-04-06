@@ -10,11 +10,10 @@ class UserEditType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password')
             ->add('name')
             ->add('lastName')
             ->add('birthDay',BirthdayType::class,[
-            'format'=>'d/M/y'
+            'format'=>'dMy'
         ]);
 //            ->add('address',EntityType::class,[
 //                'class'=>Address::class

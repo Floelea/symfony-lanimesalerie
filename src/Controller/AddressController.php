@@ -34,7 +34,7 @@ class AddressController extends AbstractController
             $address->setUser($this->getUser());
             $manager->persist($address);
             $manager->flush();
-            return $this->redirectToRoute('user_profile',['id'=>$address->getUser()->getId()]);
+            return $this->redirectToRoute('app_address');
         }
         return $this->renderForm('address/new.html.twig',[
             'formUserAddress'=>$form
@@ -55,10 +55,25 @@ class AddressController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $manager->persist($address);
             $manager->flush();
-            return $this->redirectToRoute('user_profile');
+            return $this->redirectToRoute('app_address');
         }
         return $this->renderForm('address/edit.html.twig',[
             'formAddressEdit'=>$form
         ]);
+    }
+
+    /**
+     * @Route("/user/address/delete/{id}",name="userAddress_delete")
+     * @param Address $address
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(Address $address,EntityManagerInterface $manager)
+    {
+        if($address){
+            $manager->remove($address);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('app_address');
     }
 }

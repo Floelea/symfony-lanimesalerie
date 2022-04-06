@@ -62,6 +62,32 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * @return void
+     */
+    public function search($mots)
+    {
+        $query = $this->createQueryBuilder('u');
+        if($mots != null){
+            $query->where('u.username = :val')
+                ->setParameter(':val',$mots);
+        }
+        return $query->getQuery()->getResult();
+    }
+
+    public function newUserSinceAWeek($week)
+    {
+        return $this->createQueryBuilder('user')
+            ->andWhere('user.createdAt > :week')
+            ->setParameter('week', $week)
+//            ->andWhere('user.createdAt < :week')
+//            ->setParameter('week', $week)
+            ->orderBy('user.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

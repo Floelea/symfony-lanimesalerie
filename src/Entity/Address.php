@@ -135,4 +135,8 @@ class Address
 
         return $this;
     }
+
+    public function getMyCustomTypeField(){
+        return $this->number. ' '.$this->street. ' '.$this->postalCode. ' '.$this->city;
+    }
 }

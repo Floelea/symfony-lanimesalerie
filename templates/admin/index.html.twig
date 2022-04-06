@@ -4,8 +4,31 @@
 
 {% block body %}
 
-    <a href="{{ path('new_product') }}" class="btn btn-warning">AJOUTER UN NOUVEAU PRODUIT</a>
-    <a href="{{ path('new_productCategory') }}"class="btn btn-warning">AJOUTER UNE NOUVELLE CATEGORIE DE PRODUIT</a>
-    <a href="{{ path('product_category') }}" class="btn btn-warning">Voir les categorie de produit</a>
-    <a href="{{ path('product_sub_category_new') }}" class="btn btn-warning">AJOUTER UNE NOUVELLE SOUS CATEGORIE A UNE CATEGORIE</a>
+    <div class="container userInfo">
+        <div class="row mt-5 container">
+            <div class="col-3 p-0 d-flex flex-column align-items-center">
+                <div class="mt-4">
+                    <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
+                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
+                    <a href="" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
+                </div>
+
+            </div>
+            <div class="col-9 p-0">
+                <div class="bg-white m-4">
+                    <div class="px-4">
+                        <div class="">
+                            <h5 class="pt-2 fw-bold"> Tableau de bord de la semaine </h5>
+                        </div>
+                        <div class="py-3">
+                                <p>Nouveau client : {{ newUserWeekAGo }}</p>
+                            <p>Nouvelle commande : {{ newOrderWeekAGo }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+
 {% endblock %}

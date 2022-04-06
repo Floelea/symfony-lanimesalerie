@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% form_theme formSearchUser 'bootstrap_5_layout.html.twig' %}
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <div class="container userInfo">
+        <div class="row mt-5 container">
+            <div class="col-3 p-0 d-flex flex-column align-items-center">
+                <div class="mt-4">
+                    <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
+                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
+                    <a href="" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
+                </div>
+
+            </div>
+            <div class="col-9 p-0">
+                <div class="bg-white m-4">
+                    <div class="px-4">
+                        <div class="">
+                            <h5 class="pt-2 fw-bold"> Recherche rapide : </h5>
+                        </div>
+                        <div class="py-3">
+                            {{ form(formSearchUser) }}
+                            {% for user in users %}
+                                <table class="table table-striped">
+                                    <thead class="align-items-center">
+                                    <tr style="font-size: 13px">
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Username</th>
+                                        <th>Date de naissance</th>
+                                        <th>Création du compte</th>
+                                        <th>Nombre de commande </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ user.name }}</td>
+                                            <td>{{ user.lastName }}</td>
+                                            <td>{{ user.username }}</td>
+                                            <td>{{ user.birthDay|date('d/m/Y')}}</td>
+                                            <td>{{ user.createdAt|date('d/m/Y') }}</td>
+                                            <td>{{ user.orders|length}}</td>
+                                            <td>
+                                                <a href="" class="btn btn-warning">Modifier</a>
+                                                <a href="" class="btn btn-danger">Supprimer</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <h5 class="pt-2 fw-bold"> Nouveau Client : </h5>
+                        </div>
+                        <div class="py-3">
+                            <table class="table table-striped">
+                                <thead class="align-items-center">
+                                <tr style="font-size: 13px">
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Username</th>
+                                    <th>Date de naissance</th>
+                                    <th>Création du compte</th>
+                                    <th>Nombre de commande </th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for newUser in newUsers %}
+                                    <tr>
+                                        <td>{{ newUser.name }}</td>
+                                        <td>{{ newUser.lastName }}</td>
+                                        <td>{{ newUser.username }}</td>
+                                        <td>{{ newUser.birthDay|date('d/m/Y')}}</td>
+                                        <td>{{ newUser.createdAt|date('d/m/Y') }}</td>
+                                        <td>{{ newUser.orders|length}}</td>
+                                        <td>
+                                            <a href="{{ path('admin_userEdit',{id:newUser.id}) }}" class="btn btn-warning">Modifier</a>
+                                            <a href="{{ path('admin_userDelete',{id:newUser.id}) }}" class="btn btn-danger">Supprimer</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+
+{% endblock %}
