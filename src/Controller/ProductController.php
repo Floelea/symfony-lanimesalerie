@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;use App\Entity\ProductCategory;use App\Form\ProductType;use App\Repository\ProductRepository;use Doctrine\ORM\EntityManagerInterface;use Knp\Component\Pager\PaginatorInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Product;use App\Entity\ProductCategory;use App\Form\ProductType;
+use App\Form\SearchProductType;
+use App\Repository\ProductRepository;use Doctrine\ORM\EntityManagerInterface;use Knp\Component\Pager\PaginatorInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
@@ -47,14 +49,25 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("product/{id}",name="product_show")
-     * @param ProductRepository $productRepository
-     * @return void
+     * @Route("/admin/product",name="admin_product")
+     * @return Response
      */
-    public function show(Product $product)
+    public function searchProduct(Request $request,ProductRepository $productRepository)
     {
-        return $this->render('product/show.html.twig',[
-            'product'=>$product
+        $products=null;
+        $form = $this->createForm(SearchProductType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $criteria = $form->getData();
+//           dd($criteria);
+            $products = $productRepository->findProduct($criteria);
+//           dd($products);
+        }
+        return $this->renderForm('admin/product.html.twig',[
+            'formSearchProduct'=>$form,
+            'products'=>$products
         ]);
     }
+
+
 }

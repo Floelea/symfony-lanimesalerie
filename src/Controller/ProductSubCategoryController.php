@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\ProductSubCategory;use App\Form\ProductSubCategoryType;use App\Repository\ProductSubCategoryRepository;use Doctrine\ORM\EntityManagerInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\ProductSubCategory;use App\Form\ProductSubCategoryType;
+use App\Repository\ProductCategoryRepository;
+use App\Repository\ProductSubCategoryRepository;use Doctrine\ORM\EntityManagerInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\Routing\Annotation\Route;
 
 class ProductSubCategoryController extends AbstractController
 {
-    #[Route('/product/subCategory', name: 'product_sub_category')]
-    public function index(ProductSubCategoryRepository $repo): Response
+    #[Route('/admin/product/subCategory', name: 'admin_subCategory')]
+    public function productSubCategory(ProductCategoryRepository $productCategoryRepository): Response
     {
-        $subCategories = $repo->findAll();
+        $categories = $productCategoryRepository->findAll();
 
-        return $this->render('product_sub_category/index.html.twig', [
-            'subCategories' => $subCategories
+        return $this->render('admin/subCategory.html.twig', [
+            'categories' => $categories
         ]);
     }
 

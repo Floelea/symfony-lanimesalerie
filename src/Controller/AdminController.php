@@ -3,22 +3,25 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Form\SearchProductType;
 use App\Form\SearchUserType;
 use App\Form\UserEditType;
 use App\Repository\OrderRepository;
+use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function index(UserRepository $userRepository,OrderRepository $orderRepository): Response
+    public function board(UserRepository $userRepository,OrderRepository $orderRepository): Response
     {
         $today = new \DateTime();
         $sevenDaysAGo = new \DateInterval('P7D');
@@ -38,7 +41,7 @@ class AdminController extends AbstractController
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function user(UserRepository $userRepository,Request $request)
+    public function searchUser(UserRepository $userRepository,Request $request)
     {
         $users = null;
         $form = $this->createForm(SearchUserType::class);
@@ -54,6 +57,37 @@ class AdminController extends AbstractController
             'formSearchUser'=> $form,
             'users'=> $users,
             'newUsers'=>$newUsers
+        ]);
+    }
+
+    /**
+     * @Route("/admin/user/new}",name="admin_userNew")
+     * @return void
+     */
+    public function userNew(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $user->setCreatedAt(new \DateTime());
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            return $this->redirectToRoute('admin_user');
+        }
+
+        return $this->render('admin/userNew.html.twig', [
+            'registrationForm' => $form->createView(),
         ]);
     }
 
@@ -84,7 +118,7 @@ class AdminController extends AbstractController
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteUser(EntityManagerInterface $manager,User $user)
+    public function userDelete(EntityManagerInterface $manager,User $user)
     {
        if($user){
            $manager->remove($user);
@@ -92,4 +126,6 @@ class AdminController extends AbstractController
        }
        return $this->redirectToRoute('admin_user');
     }
+
+
 }

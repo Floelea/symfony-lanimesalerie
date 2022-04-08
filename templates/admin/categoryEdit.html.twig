@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
-{% form_theme formSubCategory 'bootstrap_5_layout.html.twig' %}
+{% block title %}Hello AdminController!{% endblock %}
+{% form_theme formCategoryEdit 'bootstrap_5_layout.html.twig' %}
 {% block body %}
+
     <div class="container userInfo">
         <div class="row mt-5 container">
             <div class="col-3 p-0 d-flex flex-column align-items-center">
@@ -13,7 +14,7 @@
                     <a href="{{ path('new_product') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
                     <a href="{{ path('admin_category') }}" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Catégories</p></a>
                     <a href="{{ path('new_productCategory') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
-                    <a href="" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Sous-catégories</p></a>
+                    <a href="{{ path('admin_subCategory') }}" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Sous-catégories</p></a>
                     <a href="{{ path('product_sub_category_new') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
                 </div>
 
@@ -22,14 +23,14 @@
                 <div class="bg-white m-4">
                     <div class="px-4">
                         <div class="">
-                            <h5 class="pt-2 fw-bold">Créer une sous-catégorie de produit</h5>
+                            <h5 class="pt-2 fw-bold">Modifier une catégorie de produit</h5>
                         </div>
                         <div class="py-3">
-                            {{ form_start(formSubCategory) }}
-                            {{ form_row(formSubCategory.productCategory) }}
-                            {{ form_row(formSubCategory.name) }}
-                            <button type="submit" class="btn btn-success">Register</button>
-                            {{ form_end(formSubCategory) }}
+                            {{ form_start(formCategoryEdit) }}
+                            {{ form_row(formCategoryEdit.name) }}
+                            <button type="submit" class="btn btn-success">Modifier</button>
+                            {{ form_end(formCategoryEdit) }}
+
                         </div>
                     </div>
                 </div>
@@ -37,6 +38,5 @@
         </div>
     </div>
     <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
-
 
 {% endblock %}

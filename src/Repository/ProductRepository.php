@@ -46,22 +46,26 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findProduct($criteria)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('p.animalCategory','animalCategory')
+            ->Where('animalCategory.name = :animalCategory')
+            ->setParameter('animalCategory', $criteria['animalCategory']->getName())
+            ->leftJoin('p.productCategory','productCategory')
+            ->andWhere('productCategory.name = :productCategory')
+            ->setParameter('productCategory', $criteria['productCategory']->getName())
+            ->leftJoin('p.productSubCategory','productSubCategory')
+            ->andWhere('productSubCategory.name = :productSubCategory')
+            ->setParameter('productSubCategory', $criteria['productSubCategory']->getName())
+//            ->orderBy('p.name', 'ASC')
+//            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Product

@@ -3,26 +3,56 @@
 {% block title %}Register{% endblock %}
 {% form_theme formProduct 'bootstrap_5_layout.html.twig' %}
 {% block body %}
-    <h1>Register</h1>
+    <div class="container userInfo">
+        <div class="row mt-5 container">
+            <div class="col-3 p-0 d-flex flex-column align-items-center">
+                <div class="mt-4">
+                    <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
+                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
+                    <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
+                    <a href="" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
+                    <a href="" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Catégories</p></a>
+                    <a href="{{ path('new_productCategory') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
+                    <a href="" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Sous-catégories</p></a>
+                    <a href="{{ path('product_sub_category_new') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
+                </div>
 
-    {{ form_start(formProduct) }}
-    {{ form_row(formProduct.animalCategory) }}
-    {{ form_row(formProduct.productCategory) }}
-    {{ form_row(formProduct.productSubCategory) }}
-    {{ form_row(formProduct.name) }}
-    {{ form_row(formProduct.description) }}
-    {{ form_row(formProduct.priceHt) }}
-    <ul class="tags"
-        data-index="{{ formProduct.images|length > 0 ? formProduct.images|last.vars.name + 1 : 0 }}"
+            </div>
+            <div class="col-9 p-0">
+                <div class="bg-white m-4">
+                    <div class="px-4">
+                        <div class="">
+                            <h5 class="pt-2 fw-bold">Créer un nouveau produit</h5>
+                        </div>
+                        <div class="py-3">
+                            {{ form_start(formProduct) }}
+                            {{ form_row(formProduct.animalCategory) }}
+                            {{ form_row(formProduct.productCategory) }}
+                            {{ form_row(formProduct.productSubCategory) }}
+                            {{ form_row(formProduct.name) }}
+                            {{ form_row(formProduct.description) }}
+                            {{ form_row(formProduct.priceHt) }}
+                            <ul class="tags"
+                                data-index="{{ formProduct.images|length > 0 ? formProduct.images|last.vars.name + 1 : 0 }}"
 
-        data-prototype="{{ form_widget(formProduct.images.vars.prototype)|e('html_attr') }}"
+                                data-prototype="{{ form_widget(formProduct.images.vars.prototype)|e('html_attr') }}"
 
 
-    ></ul>
+                            ></ul>
 
-    <button type="button" class="add_item_link" data-collection-holder-class="tags">Add a Picture</button>
-    <button type="submit" class="btn btn-success">Register</button>
-    {{ form_end(formProduct) }}
+                            <button type="button" class="add_item_link" data-collection-holder-class="tags">Add a Picture</button>
+                            <button type="submit" class="btn btn-success">Register</button>
+                            {{ form_end(formProduct) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+
+
+
 
     <script>
 
