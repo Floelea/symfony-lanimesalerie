@@ -56,6 +56,37 @@ class OrderRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    /**
+     * @param $week
+     * @return float|int|mixed|string
+     */
+    public function newOrderSinceAWeek($week)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.createdAt > :week')
+            ->setParameter('week', $week)
+//            ->andWhere('user.createdAt < :week')
+//            ->setParameter('week', $week)
+            ->orderBy('o.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+//    public function searchStatus(){
+//        return $this->createQueryBuilder('or')
+//            ->where('or.orderStatus == :status')
+//            ->setParameter('status', '')
+////            ->andWhere('user.createdAt < :week')
+////            ->setParameter('week', $week)
+////            ->orderBy('o.id', 'ASC')
+////            ->setMaxResults(50)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */

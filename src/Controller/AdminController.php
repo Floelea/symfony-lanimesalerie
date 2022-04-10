@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function board(UserRepository $userRepository,OrderRepository $orderRepository): Response
+    public function index(UserRepository $userRepository,OrderRepository $orderRepository): Response
     {
         $today = new \DateTime();
         $sevenDaysAGo = new \DateInterval('P7D');

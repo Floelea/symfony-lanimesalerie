@@ -22,6 +22,18 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("product/{id}",name="product_show")
+     * @param ProductRepository $productRepository
+     * @return void
+     */
+    public function show(Product $product)
+    {
+        return $this->render('product/show.html.twig',[
+            'product'=>$product
+        ]);
+    }
+
+    /**
      * @Route("/admin/new/product",name="new_product")
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -69,5 +81,40 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/product/edit/{id}",name="edit_product")
+     * @param Product $product
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function edit(Product $product,Request $request,EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ProductType::class,$product);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($product);
+            $manager->flush();
+            return $this->redirectToRoute('admin_product');
+        }
+        return $this->renderForm('admin/productEdit.html.twig',[
+            'formProductEdit'=>$form
+        ]);
+    }
+
+    /**
+     * @Route("/admin/product/delete/{id}",name="delete_product")
+     * @param Product $product
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(Product $product,EntityManagerInterface $manager)
+    {
+       if($product){
+           $manager->remove($product);
+           $manager->flush();
+       }
+       return $this->redirectToRoute('admin_product');
+    }
 
 }

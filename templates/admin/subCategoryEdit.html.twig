@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
-{% form_theme formCategoryEdit 'bootstrap_5_layout.html.twig' %}
+{% form_theme formSubCategoryEdit 'bootstrap_5_layout.html.twig' %}
 {% block body %}
 
     <div class="container userInfo">
@@ -26,10 +26,10 @@
                             <h5 class="pt-2 fw-bold">Modifier une catégorie de produit</h5>
                         </div>
                         <div class="py-3">
-                            {{ form_start(formCategoryEdit) }}
-                            {{ form_row(formCategoryEdit.name) }}
+                            {{ form_start(formSubCategoryEdit) }}
+                            {{ form_row(formSubCategoryEdit.name) }}
                             <button type="submit" class="btn btn-success">Modifier</button>
-                            {{ form_end(formCategoryEdit) }}
+                            {{ form_end(formSubCategoryEdit) }}
 
                         </div>
                     </div>

@@ -32,10 +32,31 @@ class ProductSubCategoryController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($subCategory);
             $manager->flush();
-            return $this->redirectToRoute('product_sub_category');
+            return $this->redirectToRoute('admin_subCategory');
         }
         return $this->renderForm('product_sub_category/new.html.twig',[
             'formSubCategory'=>$form
+        ]);
+    }
+
+    /**
+     * @Route("/admin/product/subCategory/edit/{id}",name="edit_productSubCategory")
+     * @param ProductSubCategory $productSubCategory
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function edit(ProductSubCategory $productSubCategory,Request $request,EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ProductSubCategoryType::class,$productSubCategory);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $manager->persist($productSubCategory);
+            $manager->flush();
+            return $this->redirectToRoute('admin_subCategory');
+        }
+        return $this->renderForm('admin/subCategoryEdit.html.twig',[
+            'formSubCategoryEdit'=>$form
         ]);
     }
 }

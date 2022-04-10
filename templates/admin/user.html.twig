@@ -10,7 +10,7 @@
                 <div class="mt-4">
                     <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
                     <a href="{{ path('admin_userNew') }}" class="d-flex align-items-center m-3 ms-5 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Nouveau client</p></a>
-                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
+                    <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
                     <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
                 </div>
 
@@ -27,10 +27,7 @@
                                 <table class="table table-striped">
                                     <thead class="align-items-center">
                                     <tr style="font-size: 13px">
-                                        <th>Nom</th>
-                                        <th>Prénom</th>
                                         <th>Username</th>
-                                        <th>Date de naissance</th>
                                         <th>Création du compte</th>
                                         <th>Nombre de commande </th>
                                         <th>Actions</th>
@@ -38,15 +35,12 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{ user.name }}</td>
-                                            <td>{{ user.lastName }}</td>
                                             <td>{{ user.username }}</td>
-                                            <td>{{ user.birthDay|date('d/m/Y')}}</td>
                                             <td>{{ user.createdAt|date('d/m/Y') }}</td>
                                             <td>{{ user.orders|length}}</td>
                                             <td>
-                                                <a href="" class="btn btn-warning">Modifier</a>
-                                                <a href="" class="btn btn-danger">Supprimer</a>
+                                                <a href="{{ path('admin_userEdit',{id:user.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="{{ path('admin_userDelete',{id:user.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -54,16 +48,13 @@
                             {% endfor %}
                         </div>
                         <div>
-                            <h5 class="pt-2 fw-bold"> Nouveau Client : </h5>
+                            <h5 class="pt-2 fw-bold">Nouveau Client de la semaine :</h5>
                         </div>
                         <div class="py-3">
                             <table class="table table-striped">
                                 <thead class="align-items-center">
                                 <tr style="font-size: 13px">
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
                                     <th>Username</th>
-                                    <th>Date de naissance</th>
                                     <th>Création du compte</th>
                                     <th>Nombre de commande </th>
                                     <th>Actions</th>
@@ -72,15 +63,12 @@
                                 <tbody>
                                 {% for newUser in newUsers %}
                                     <tr>
-                                        <td>{{ newUser.name }}</td>
-                                        <td>{{ newUser.lastName }}</td>
                                         <td>{{ newUser.username }}</td>
-                                        <td>{{ newUser.birthDay|date('d/m/Y')}}</td>
                                         <td>{{ newUser.createdAt|date('d/m/Y') }}</td>
                                         <td>{{ newUser.orders|length}}</td>
                                         <td>
-                                            <a href="{{ path('admin_userEdit',{id:newUser.id}) }}" class="btn btn-warning">Modifier</a>
-                                            <a href="{{ path('admin_userDelete',{id:newUser.id}) }}" class="btn btn-danger">Supprimer</a>
+                                            <a href="{{ path('admin_userEdit',{id:newUser.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="{{ path('admin_userDelete',{id:newUser.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                                         </td>
                                     </tr>
                                 {% endfor %}

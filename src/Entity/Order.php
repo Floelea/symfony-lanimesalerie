@@ -37,6 +37,9 @@ class Order
     #[ORM\OneToMany(mappedBy: 'orderObject', targetEntity: OrderItem::class, orphanRemoval: true)]
     private $orderItems;
 
+    #[ORM\ManyToOne(targetEntity: OrderStatus::class, inversedBy: 'orderObject')]
+    private $orderStatus;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -133,6 +136,18 @@ class Order
                 $orderItem->setOrderObject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrderStatus(): ?OrderStatus
+    {
+        return $this->orderStatus;
+    }
+
+    public function setOrderStatus(?OrderStatus $orderStatus): self
+    {
+        $this->orderStatus = $orderStatus;
 
         return $this;
     }
