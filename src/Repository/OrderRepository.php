@@ -75,18 +75,8 @@ class OrderRepository extends ServiceEntityRepository
             ;
     }
 
-//    public function searchStatus(){
-//        return $this->createQueryBuilder('or')
-//            ->where('or.orderStatus == :status')
-//            ->setParameter('status', '')
-////            ->andWhere('user.createdAt < :week')
-////            ->setParameter('week', $week)
-////            ->orderBy('o.id', 'ASC')
-////            ->setMaxResults(50)
-//            ->getQuery()
-//            ->getResult()
-//            ;
-//    }
+
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */

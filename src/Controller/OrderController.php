@@ -11,8 +11,8 @@ use App\Service\CartService;use Doctrine\ORM\EntityManagerInterface;use Symfony\
 
 class OrderController extends AbstractController
 {
-    #[Route('/order', name: 'order')]
-    public function new( CartService $cartService,Request $request,EntityManagerInterface $manager,SessionInterface $session): Response
+    #[Route('/order/{id}', name: 'order')]
+    public function new( Address $address, CartService $cartService,Request $request,EntityManagerInterface $manager,SessionInterface $session): Response
     {
         $order = new Order();
         $form = $this->createForm(OrderType::class,$order);
@@ -20,6 +20,7 @@ class OrderController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $order->setUser($this->getUser());
             $order->setTotal($cartService->getTotal());
+            $order->setAddress($address);
             $order->setCreatedAt(new \DateTime());
             $manager->persist($order);
             foreach ($cartService->getCart() as $item){
@@ -37,9 +38,25 @@ class OrderController extends AbstractController
         return $this->renderForm('order/index.html.twig', [
             'cartObject' => $cartService->getCart(),
             'total'=> $cartService->getTotal(),
-            'formOrder'=>$form
+            'formOrder'=>$form,
+            'address'=>$address
 
         ]);
+    }
+
+    /**
+     * @Route("/admin/order/delete/{id}",name="delete_order")
+     * @param Order $order
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(Order $order,EntityManagerInterface $manager)
+    {
+        if($order){
+            $manager->persist($order);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('admin_order');
     }
 
     /**

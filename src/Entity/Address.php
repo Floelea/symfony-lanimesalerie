@@ -137,6 +137,9 @@ class Address
     }
 
     public function getMyCustomTypeField(){
-        return $this->number. ' '.$this->street. ' '.$this->postalCode. ' '.$this->city;
+
+           return $this->number. ' '.$this->street. ' '.$this->postalCode. ' '.$this->city;
+
     }
+
 }

@@ -45,6 +45,9 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ path('user_profile')}}">Mon profil</a></li>
                                 <li><a class="dropdown-item" href="{{ path('signout') }}">Déconnexion</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a class="dropdown-item" href="{{ path('admin') }}">Admin</a></li>
+                                 {% endif %}
                             </ul>
                         </div>
                     {% else %}
@@ -55,7 +58,7 @@
             </li>
             <!-------------------------BASKET----------------------->
             <li class="basket d-flex align-items-center">
-                <a href=""><i class="fas fa-shopping-basket"></i></a>
+                <a href="{{ path('cart') }}"><i class="fas fa-shopping-basket"></i></a>
                 <p class="m-0">Mon panier</p>
             </li>
             <!-------------------------FIND US----------------------->

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
-
+{% form_theme formOrderEdit 'bootstrap_5_layout.html.twig' %}
 {% block body %}
 
     <div class="container userInfo">
@@ -40,6 +40,7 @@
                                         <td>{{ order.payment.name }}</td>
                                         <td>
                                             {{ form_start(formOrderEdit) }}
+                                            {{ form_row(formOrderEdit.orderStatus) }}
                                             <button type="submit" class="btn btn-success">Modifier</button>
                                             {{ form_end(formOrderEdit) }}
 

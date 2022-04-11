@@ -43,13 +43,13 @@
                                             <td>En cours</td>
                                             <td>
                                                 <a href="{{ path('order_edit',{id:newOrder.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a href="{{ path('delete_order',{id:newOrder.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         {% else %}
                                             <td>{{ newOrder.orderStatus.status }}</td>
                                         {% endif %}
 
-                                        {#                                        <td>{{ newUser.orders|length}}</td>#}
+
 
                                     </tr>
                                 {% endfor %}
