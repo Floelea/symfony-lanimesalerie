@@ -52,6 +52,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Cart::class, cascade: ['persist', 'remove'])]
     private $cart;
 
+    #[ORM\ManyToOne(targetEntity: Newsletter::class, inversedBy: 'user')]
+    private $newsletter;
+
     public function __construct()
     {
         $this->address = new ArrayCollection();
@@ -271,6 +274,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->cart = $cart;
+
+        return $this;
+    }
+
+    public function getNewsletter(): ?Newsletter
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(?Newsletter $newsletter): self
+    {
+        $this->newsletter = $newsletter;
 
         return $this;
     }

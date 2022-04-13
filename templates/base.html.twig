@@ -100,10 +100,58 @@
                 <p>Service client</p>
                 <p>6 jours sur 7</p>
             </div>
-
         </div>
     </div>
 
+    <div class="row  m-0 bg-black text-white">
+        <div class="col-4 p-5 text-end footerLeft">
+            <p class="text-white fw-bold">Rejoignez la communauté La Nîmesalerie</p>
+            <p>Recevez les conseils de nos experts et les promos exclusives dans votre boite mail !</p>
+            <form action="{{ path('newsletter') }}" method="post" class="container m-0 d-flex flex-column">
+                <div class="form-group mb-3 ">
+                    <input type="mail" name="newsletter" class="form-control" placeholder="newsletter" id="inputDefault">
+                </div>
+                <button type="submit" class="btn btn-info submitNewsletter text-white">Je m'abonne</button>
+            </form>
+            <hr>
+            <div class="d-flex justify-content-end">
+                <i class="fab fa-circle fa-facebook-f rounded-circle"></i>
+                <i class="fab fa-circle fa-instagram rounded-circle"></i>
+                <i class="fab fa-youtube rounded-circle"></i>
+                <i class="fab fa-pinterest-p rounded-circle"></i>
+            </div>
+        </div>
+        <div class="col-4 p-5 text-center text-white">
+            <div class="py-3 footerQuestion">
+                <p class="text-white fw-bold">Une question ?</p>
+                <p class="" style="font-size: 14px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis dolore doloremque earum eligendi, est eum id illo minima minus natus non optio, pariatur porro quibusdam repellat repellendus soluta sunt, vitae.</p>
+                <p>HEURES D'OUVERTURE</p>
+                <p class="m-0" style="font-size: 14px">Du lundi au vendredi de 9h à 13h et de 14h à18h</p>
+                <p class="m-0" style="font-size: 14px">le samedi de 10h à 13h et de 14h à 18h.</p>
+                <div class="d-flex justify-content-center align-items-center mt-3">
+                    <i class="fas fa-phone-alt pe-3"></i>
+                    <p class="m-0">04 56 25 36 58</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-5  text-white ">
+            <div class="ps-3 footerRight">
+                <p>FAQ</p>
+                <p>CGU/CGV</p>
+                <p>Mentions légales</p>
+                <p>Politique de confidentialité</p>
+                <p>Cookies</p>
+            </div>
+            <hr>
+            <p class="text-white fw-bold">Nos moyens de paiements</p>
+            <div class="d-flex fs-3">
+                <i class="fab fa-cc-visa pe-3"></i>
+                <i class="fab fa-cc-mastercard pe-3"></i>
+                <i class="fab fa-cc-amex pe-3"></i>
+                <i class="fab fa-cc-paypal"></i>
+            </div>
+        </div>
+    </div>
 
     </body>
 </html>
