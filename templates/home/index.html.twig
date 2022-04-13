@@ -5,6 +5,11 @@
 
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="container">
     <!------------NAVBAR ANIMALS----------->
     <hr class="mt-0" />

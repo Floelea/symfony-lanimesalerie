@@ -12,6 +12,7 @@ class RegistrationFormType extends AbstractType
             ->add('name')
             ->add('last_name')
             ->add('username')
+            ->add('email')
             ->add('birthDay',BirthdayType::class,[
                 'format'=>'d/M/y'
             ])

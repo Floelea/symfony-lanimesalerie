@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserProfileController!{% endblock %}
+
+
+
+{% block body %}
+    <div class="container userInfo">
+        <div class="row mt-5 container">
+            <div class="col-3 p-0 d-flex flex-column align-items-center">
+                <div class="mt-4">
+                    <a href="{{ path('user_edit') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-user me-2"></i><p class="m-0">Modifier mon profil</p></a>
+                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-address-book me-2"></i><p class="m-0">Mes adresses</p></a>
+                    <a href="{{ path('user_order') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-clipboard me-2"></i><p class="m-0">Mes commandes</p></a>
+                </div>
+
+            </div>
+            <div class="col-9 p-0">
+                <div class="bg-white m-4">
+                    <div class="px-4">
+                        <div class="">
+                            <h5 class="pt-2 fw-bold">Mes commandes</h5>
+                        </div>
+                        <div class="py-3">
+
+                            {% if app.user.orders|length == 0 %}
+                                <p>pas commande</p>
+                                {% else %}
+                                                                    {% for order in orders %}
+                                                                        <div class="card mb-4">
+                                                                            <div class="card-header d-flex justify-content-between" style="font-size: 11px">
+                                                                                <div>
+                                                                                    COMMANDE EFFECTUEE LE {{ order.createdAt|date('d/m/Y') }}
+                                                                                </div>
+                                                                                <div>
+                                                                                    N° DE COMMANDE : {{ order.id }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Special title treatment</h5>
+                                                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                                            </div>
+                                                                            {% if order.orderStatus == null %}
+                                                                                <div class="card-footer bg-warning d-flex justify-content-between" style="font-size: 11px">
+                                                                                    <div class="text-white fw-bold">
+                                                                                        TOTAL : {{ order.total }}<sup>€</sup>
+                                                                                    </div>
+                                                                                    <div class="text-white fw-bold">
+                                                                                        EN COURS
+                                                                                    </div>
+                                                                                </div>
+                                                                            {% else %}
+                                                                                <div class="card-footer bg-success d-flex justify-content-between" style="font-size: 11px">
+                                                                                    <div class="text-white fw-bold">
+                                                                                        TOTAL : {{ order.total }}<sup>€</sup>
+                                                                                    </div>
+                                                                                    <div class="text-white fw-bold text-uppercase">
+                                                                                        {{ order.orderStatus.status }}
+                                                                                    </div>
+                                                                                </div>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    {% endfor %}
+                            {% endif %}
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    <div class="" style="background-color: grey">#}
+    {#        <div class="row">#}
+    {#           <div class="col-3 bg-info p-0">#}
+    {#           </div>#}
+    {#            <div class="col-9 p-0">#}
+    {#                <h4 class="m-5">Mes informations personnelles</h4>#}
+    {#                <div class="m-5 bg-white">#}
+    {#                    <div class="">{{ user.username }}</div>#}
+    {#                    <p class="">Prénom : {{ user.name }}</p>#}
+    {#                    <p class="">Nom de Famille : {{ user.lastName }}</p>#}
+    {#                    <p class="">Date de Naissance : {{ user.birthDay|date('d/m/Y') }}</p>#}
+    {#                    <a href="{{ path('user_edit') }}" class="btn btn-success">Edit User</a>#}
+    {#                    <h5>Adresse :</h5>#}
+    {#                    {% if app.user.address|length == 0 %}#}
+    {#                        <a href="{{ path('new_user_address') }}" class="btn btn-info">Enregistrez une adresse</a>#}
+    {#                    {% else %}#}
+    {#                        {% for address in  app.user.address%}#}
+    {#                            <div class="">#}
+    {#                                <div>#}
+    {#                                    <p>{{ address.number }} {{ address.street }}</p>#}
+    {#                                </div>#}
+    {#                                <div>#}
+    {#                                    <p>{{ address.postalCode }} {{ address.city }}</p>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                            <a href="{{ path('userAddress_edit',{id:address.id}) }}" class="btn btn-success">Edit Address</a>#}
+    {#                        {% endfor %}#}
+    {#                        <a href={{ path('new_user_address') }} class="btn btn-info">Enregistrez une nouvelle adresse</a>#}
+    {#                    {% endif %}#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+
+
+{% endblock %}
