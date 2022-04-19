@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductCategory;
+use App\Entity\ProductStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ProductCategory|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProductCategory|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProductCategory[]    findAll()
- * @method ProductCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProductStatus|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProductStatus|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProductStatus[]    findAll()
+ * @method ProductStatus[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductCategoryRepository extends ServiceEntityRepository
+class ProductStatusRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductCategory::class);
+        parent::__construct($registry, ProductStatus::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(ProductCategory $entity, bool $flush = true): void
+    public function add(ProductStatus $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class ProductCategoryRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(ProductCategory $entity, bool $flush = true): void
+    public function remove(ProductStatus $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -45,9 +45,8 @@ class ProductCategoryRepository extends ServiceEntityRepository
         }
     }
 
-
     // /**
-    //  * @return ProductCategory[] Returns an array of ProductCategory objects
+    //  * @return ProductStatus[] Returns an array of ProductStatus objects
     //  */
     /*
     public function findByExampleField($value)
@@ -64,15 +63,14 @@ class ProductCategoryRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ProductCategory
+    public function findOneBySomeField($value): ?ProductStatus
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.name = :id')
+            ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
     */
-
 }

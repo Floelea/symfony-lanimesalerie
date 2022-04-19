@@ -5,9 +5,12 @@ namespace App\Form;
 use App\Entity\AnimalCategory;
 use App\Entity\Product;
 use App\Entity\ProductCategory;
+use App\Entity\ProductStatus;
 use App\Entity\ProductSubCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,6 +36,16 @@ class ProductType extends AbstractType
             ->add('priceHt')
             ->add('name')
             ->add('description')
+
+            ->add('productStatus',EntityType::class,[
+                'class'=>ProductStatus::class,
+                'choice_label'=>'active'
+
+
+            ])
+            ->add('promo',CheckboxType::class
+
+            )
         ->add('images',CollectionType::class,[
         'entry_type'=>ImageType::class,
         'allow_add'=>true,

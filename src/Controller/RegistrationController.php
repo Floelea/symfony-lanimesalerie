@@ -71,7 +71,6 @@ class RegistrationController extends AbstractController
             $this->addFlash("error","Ce compte n'existe pas");
             return $this->redirectToRoute('home');
         }
-
     }
 
     /**

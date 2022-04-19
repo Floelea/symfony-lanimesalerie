@@ -45,6 +45,17 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class)]
     private $orderItems;
 
+
+
+    #[ORM\Column(type: 'boolean')]
+    private $promo;
+
+    #[ORM\ManyToOne(targetEntity: ProductStatus::class, inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $productStatus;
+
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -199,4 +210,32 @@ class Product
 
         return $this;
     }
+
+
+
+    public function getPromo(): ?bool
+    {
+        return $this->promo;
+    }
+
+    public function setPromo(bool $promo): self
+    {
+        $this->promo = $promo;
+
+        return $this;
+    }
+
+    public function getProductStatus(): ?ProductStatus
+    {
+        return $this->productStatus;
+    }
+
+    public function setProductStatus(?ProductStatus $productStatus): self
+    {
+        $this->productStatus = $productStatus;
+
+        return $this;
+    }
+
+
 }

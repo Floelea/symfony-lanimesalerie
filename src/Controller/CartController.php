@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Address;
-use App\Entity\Cart;use App\Entity\Product;use App\Service\CartService;use Doctrine\ORM\EntityManagerInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\HttpFoundation\Session\SessionInterface;use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Cart;use App\Entity\Product;
+use App\Entity\User;
+use App\Service\CartService;use Doctrine\ORM\EntityManagerInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\HttpFoundation\Session\SessionInterface;use Symfony\Component\Routing\Annotation\Route;
 
 
 class CartController extends AbstractController
@@ -11,11 +13,12 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'cart')]
     public function index(CartService $cartService,SessionInterface $session): Response
     {
-        $addresses = $this->getUser()->getAddress();
+
+//        $addresses = $this->getUser()->getAddress();
         return $this->render('cart/index.html.twig', [
             'cartObject' => $cartService->getCart(),
             'total'=> $cartService->getTotal(),
-            'addresses'=>$addresses
+//            'addresses'=>$addresses
 
         ]);
     }
