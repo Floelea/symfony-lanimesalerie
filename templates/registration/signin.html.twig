@@ -5,25 +5,29 @@
 {% block body %}
 
 
-    <div class="container">
-        <div class="row registerSignin mt-5">
-            <div class="col-6 signIn p-0">
+    <div class="container py-5">
+        <div class="row registerSignin ">
+            <div class="col-6 signIn p-0 px-5">
                 <h5 class="mb-5">J'ai déjà un compte</h5>
                 <form action="{{ path('signin') }}" method="post" class="container m-0">
                     <div class="form-group mb-3 ">
-
+                        <label class="fw-light pb-1" for="email">Username*</label>
                         <input type="text" name="_username" class="form-control" placeholder="Username" id="inputDefault">
                     </div>
                     <div class="form-group mb-3">
-
+                        <label class="fw-light pb-1" for="password">Mot de passe*</label>
                         <input type="password" name="_password" class="form-control" placeholder="Password" id="inputDefault">
                     </div>
-                    <button type="submit" class="btn btn-info">Me connecter</button>
+                    <div class="d-flex flex-column pt-3">
+                        <button type="submit" class="btn btn-success userConnect">Me connecter</button>
+                    </div>
+                    <p class="mt-2">* Champs obligatoires</p>
+                    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
                 </form>
             </div>
-            <div class="col-6 register d-flex flex-column">
+            <div class="col-6 register d-flex flex-column px-5">
                 <h5 class="text-center mb-5">Vous n'avez pas de compte</h5>
-                <a href="{{ path('register') }}" class="text-center btn btn-info">Créer votre compte</a>
+                <a href="{{ path('register') }}" class="text-center btn btn-success mt-4 userCreate">Créer votre compte</a>
             </div>
         </div>
     </div>

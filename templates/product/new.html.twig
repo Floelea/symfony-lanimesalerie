@@ -31,6 +31,10 @@
                             {{ form_row(formProduct.productSubCategory) }}
                             {{ form_row(formProduct.name) }}
                             {{ form_row(formProduct.description) }}
+                            {{ form_row(formProduct.promo) }}
+
+                            {{ form_row(formProduct.productStatus,{label:'Produit actif'}) }}
+
                             {{ form_row(formProduct.priceHt) }}
                             <ul class="tags"
                                 data-index="{{ formProduct.images|length > 0 ? formProduct.images|last.vars.name + 1 : 0 }}"

@@ -10,13 +10,14 @@
             {{ message }}
         </div>
     {% endfor %}
+    <div class="productCategory"></div>
     <div class="container">
     <!------------NAVBAR ANIMALS----------->
     <hr class="mt-0" />
     <section class="navbarAnimals">
         <ul class="m-0 d-flex align-items-center">
             {% for categorie in categories %}
-                <li><a href="#">{{ categorie.name }}</a></li>
+                <li><a href="{{ path('home') }}" class="btnProductCategory">{{ categorie.name }}</a></li>
             {% endfor %}
         </ul>
     </section>
@@ -223,4 +224,18 @@
 
 </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const btnProductCategories = document.querySelectorAll('.btnProductCategory');
+            btnProductCategories.forEach(btn=>{
+                btn.addEventListener('click',(e)=>{
+                    e.preventDefault()
+                    console.log(this.href)
+                })
+            })
+        });
+
+
+    </script>
 {% endblock %}
