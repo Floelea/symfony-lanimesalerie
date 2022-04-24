@@ -4,95 +4,75 @@
 {% form_theme formOrder 'bootstrap_5_layout.html.twig' %}
 {% block body %}
 
-    <div class="container myCart">
-        <div class="row container align-items-start justify-content-between">
-            <div class="col-12 border border-1 p-0 myCart" style="height: auto">
-                <p class="py-2 m-0 myCartTitle">Récapitulatif de votre commande</p>
-                <div class="container  p-3">
+    <div class=" py-5 order">
+        <div class="container myCart">
+            <div class="row container align-items-start justify-content-between">
+                <div class="col-12 border border-1 p-0 myCart" style="height: auto">
+                    <p class="py-2 m-0 myCartTitle">Récapitulatif de votre commande</p>
+                    <div class="container  p-3">
 
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            1 : Articles
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                1 : Articles
 
-                        </div>
-                        <div class="card-body">
-                            {% for item  in cartObject %}
+                            </div>
+                            <div class="card-body">
+                                {% for item  in cartObject %}
                                     <div class="d-flex my-3">
                                         {% for image in item.product.images %}
-                                        {% if loop.first %}
-                                            <div class="mx-5">
-                                                <img src="{{ vich_uploader_asset(image,'imageFile') }}" alt="" style="width:150px">
-                                            </div>
-                                        {% endif %}
+                                            {% if loop.first %}
+                                                <div class="mx-5">
+                                                    <img src="{{ vich_uploader_asset(image,'imageFile') }}" alt="" style="width:150px">
+                                                </div>
+                                            {% endif %}
                                         {% endfor %}
                                         <div class="">
-                                           <p class="text-lowercase ">{{ item.product.name }}</p>
+                                            <p class="text-lowercase ">{{ item.product.name }}</p>
                                             <p class="">Quantitée : {{ item.quantity }} </p>
-                                            <p><strong>Total : {{ item.product.priceHt * item.quantity }}</strong><sup>€</sup></p>
+                                            <p><strong>Total : {{ (item.product.priceHt * (1+(item.product.tva.rate/100))) * item.quantity}}</strong><sup>€</sup></p>
 
                                         </div>
                                     </div>
-                            {% endfor %}
+                                {% endfor %}
 
+                            </div>
+                            <a href="{{ path('cart') }}" class="btn btn-warning">Modifier</a>
                         </div>
-                        <a href="{{ path('cart') }}" class="btn btn-warning">Modifier</a>
-                    </div>
 
 
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            2 : Adresse de livraison
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                2 : Adresse de livraison
 
+                            </div>
+                            <div class="card-body">
+                                <p>{{ address.number }} {{ address.street }} {{ address.postalCode }} {{ address.city }}</p>
+                            </div>
+                            <a href="{{ path('cart') }}" class="btn btn-warning">Modifier</a>
                         </div>
-                        <div class="card-body">
-                            <p>{{ address.number }} {{ address.street }} {{ address.postalCode }} {{ address.city }}</p>
-                        </div>
-                        <a href="{{ path('cart') }}" class="btn btn-warning">Modifier</a>
-                    </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            3 : Paiement
+                        <div class="card">
+                            <div class="card-header">
+                                3 : Paiement
 
-                        </div>
-                        <div class="card-body">
-                            {{ form_start(formOrder) }}
-                            {{ form_row((formOrder.payment)) }}
-                            <button type="submit" class="btn btn-success">Commander</button>
-                            {{ form_end(formOrder) }}
+                            </div>
+                            <div class="card-body">
+                                {{ form_start(formOrder) }}
+                                {{ form_row((formOrder.payment)) }}
+                                <button type="submit" class="btn btn-success">Commander</button>
+                                {{ form_end(formOrder) }}
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
-{#            <div class="col-4 border border-1 p-0 myCommand">#}
-{#                <p class="mb-3 py-2 myCommandTitle">Détails de ma commande</p>#}
-{#                <h4 class="ps-4">Total: {{ total }}</h4>#}
-{#                <hr>#}
-{#                {% for item in cartObject %}#}
-{#                    <div class="d-flex">#}
-{#                        <div>#}
-{#                            <img src="{{ vich_uploader_asset(item.product.images[0],'imageFile') }}" alt="" style="width:70px">#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <p class="">{{ item.product.name }}</p>#}
-{#                            <p class="">Sous-total ({{ item.quantity }}) articles : <strong>{{ item.product.priceHt * item.quantity }}</strong><sup>€</sup></p>#}
-{#                        </div>#}
 
-{#                    </div>#}
-{#                {% endfor %}#}
-{#                <div class="d-flex flex-column align-items-center">#}
-{#                    <a href="{{ path('cart') }}" class="btn btn-warning mb-3" style="width: 75%">Modifier mon panier</a>#}
-{#                    <a href="{{ path('order') }}" class="btn btn-success" style="width: 75%">Valider ma commande</a>#}
-{#                </div>#}
-{#                <div class="d-flex justify-content-around fs-1 mt-3">#}
-{#                    <i class="fa-brands fa-cc-visa"></i><i class="fa-brands fa-cc-amex"></i><i class="fa-brands fa-cc-mastercard"></i><i class="fa-brands fa-cc-paypal"></i>#}
-{#                </div>#}
-{#            </div>#}
         </div>
     </div>
+    </div>
+
 {% endblock %}

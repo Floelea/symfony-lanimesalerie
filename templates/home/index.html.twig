@@ -47,14 +47,36 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                    <p class="text-center nameCard">{{ product.name }}</p>
-                    <div class="d-flex justify-content-center avisCard align-items-center mb-3">
-                        <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
-                        <p class="m-0 ms-3">avis</p>
-                    </div>
+                    {% set sum = 0 %}
+                    {% set  length = 0%}
+                    {% set average = 0 %}
+                    {% for i in product.productReviews %}
+                        {% set sum = sum + i.note   %}
+                        {% set length = length + i|length %}
+                        {% set average = sum / length %}
+                    {% endfor %}
+                    {% if length == 0 %}
+                        <a href="{{ path('review',{id:product.id}) }}" class="btn btn-info mb-3 text-white fs-6">Soyez le premier a donner votre avis</a>
+                    {% elseif average == 5 and average >= 4.01 %}
+                        <div class="d-flex justify-content-center mb-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i>
+                            <a href="" class="text-black text-decoration-underline averageLink ms-3">Lire les {{ product.productReviews|length }} avis</a></div>
+                    {% elseif average <= 4 and average >= 3.01%}
+                        <div class="d-flex justify-content-center mb-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black text-decoration-underline averageLink ms-3">Lire les {{ product.productReviews|length }} avis</a></div>
+                    {% elseif average <= 4 and average >= 3.01%}
+                    {% elseif average <= 3 and average >= 2.01 %}
+                        <div class="d-flex justify-content-center mb-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black text-decoration-underline averageLink ms-3">Lire les {{ product.productReviews|length }} avis</a></div>
+                    {% elseif average <= 4 and average >= 3.01%}
+                    {% elseif average <= 2 and average >=1.01%}
+                        <div class="d-flex justify-content-center mb-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black text-decoration-underline averageLink ms-3">Lire les {{ product.productReviews|length }} avis</a></div>
+                    {% elseif average <= 4 and average >= 3.01%}
+                    {% elseif average >0.1 and average <= 1 %}
+                        <div class="d-flex justify-content-center mb-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black text-decoration-underline averageLink ms-3">Lire les {{ product.productReviews|length }} avis</a></div>
+                    {% elseif average <= 4 and average >= 3.01%}
+                    {% endif %}
+
 
                     <div class="d-flex align-items-center justify-content-around mb-3">
-                        <p class="m-0 priceCard">{{ product.priceHt }}<sup>€</sup></p>
+                        <p class="m-0 priceCard">{{ product.priceHt * (1+(product.tva.rate/100)) }}<sup>€</sup></p>
                         <a href="{{ path('cart_add',{id:product.id}) }}"><i class="fa-solid fa-cart-arrow-down basketCard"></i></a>
                     </div>
                 </div>

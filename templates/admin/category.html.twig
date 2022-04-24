@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container userInfo">
-        <div class="row mt-5 container">
+        <div class="row my-5 container">
             <div class="col-3 p-0 d-flex flex-column align-items-center">
                 <div class="mt-4">
                     <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
@@ -30,11 +30,13 @@
                                 <thead class="align-items-center">
                                 <tr style="font-size: 13px">
                                     <th>Nom</th>
+                                    <th>Animal</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for category in categories %}
                                         <td>{{ category.name }}</td>
+                                            <td>{{ category.animalCategory.name }}</td>
                                         <td>
                                             <a href="{{ path('edit_productCategory',{id:category.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                                             <a href="{{ path('delete_productCategory',{id:category.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>

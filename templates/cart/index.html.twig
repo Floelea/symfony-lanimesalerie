@@ -12,7 +12,18 @@
 
                   <div class="container  p-3">
                       {% if cartObject|length == 0 %}
-                          <p class="text-center">Votre panier est vide</p>
+                    <div class="d-flex">
+                        <img src="img/emptyCart.jpg" alt=""  >
+                        <div class="d-flex align-items-center flex-column justify-content-center">
+
+                            <a href="{{ path('home') }}" class="myButton btn-success" >Commencez vos achats</a>
+                        </div>
+
+                    </div>
+
+
+
+{#                          <p class="text-center">Votre panier est vide</p>#}
                       {% endif %}
                                         {#                      {% if app.user.cart|length == 0%}#}
                                         {#                          <p class="text-center">Votre panier est vide</p>#}
@@ -44,7 +55,7 @@
                                           </div>
                                       </div>
                                       <div class="card-footer ">
-                                          <p class="text-end m-0 mb-2">Sous-total ({{ item.quantity }}) articles : <strong>{{ item.product.priceHt * item.quantity }}</strong><sup>€</sup></p>
+                                          <p class="text-end m-0 mb-2">Sous-total ({{ item.quantity }}) articles : <strong>{{ (item.product.priceHt * (1+(item.product.tva.rate/100))) * item.quantity}}</strong><sup>€</sup></p>
                                       </div>
                                   </div>
                               {% endfor %}
@@ -56,6 +67,7 @@
             <div class="col-4 border border-1 p-0 myCommand">
                 <p class="mb-3 py-2 myCommandTitle">Détails de ma commande</p>
                 <h5 class="ps-4">Total : {{ total }} <sup>€</sup></h5>
+
                 <hr>
                 {% if app.user %}
                 <p class="text-center m-0" style="font-size: 17px">Adresse de livraison</p>

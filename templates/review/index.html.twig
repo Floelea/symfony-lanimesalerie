@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReviewController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <form action="{{ path('review',{id:product.id}) }}" method="post" class="container my-5 ">
+            <p class="fw-bolder fs-3">Créer votre commentaire</p>
+            {% for image in product.images %}
+                {% if loop.first %}
+                    <div class="d-flex align-items-center">
+                        <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="..." style="width: 100px" class="me-3">
+                        <p class="m-0 fs-4">{{ product.name }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <hr>
+            <p class="text-black fw-bolder">Ajouter une note</p>
+            <div class="stars form-group fs-2">
+
+                <i class="fa-solid fa-star" data-value="1"></i>
+                <i class="fa-solid fa-star" data-value="2"></i>
+                <i class="fa-solid fa-star" data-value="3"></i>
+                <i class="fa-solid fa-star" data-value="4"></i>
+                <i class="fa-solid fa-star" data-value="5"></i>
+                <input type="hidden" name="note" id="note" value="0">
+            </div>
+            <hr>
+            <p class="fw-bolder">Ajouter un titre</p>
+            <input type="text" class="form-control" name="reviewTitle">
+            <hr>
+            <p class="fw-bolder">Ajouter un commentaire</p>
+            <textarea class="form-control" name="reviewMessage"></textarea>
+                 {#                    <input type="mail" name="newsletter" class="form-control" placeholder="newsletter" id="inputDefault">#}
+
+                <button type="submit" class="btn btn-success text-white mt-3">Validez Votre commentaire</button>
+
+
+        </form>
+
+    </div>
+
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded',()=> {
+
+            //all stars
+            const stars = document.querySelectorAll(".fa-star");
+            // console.log(stars);
+
+            //input
+            const note = document.querySelector("#note");
+
+            for (star of stars){
+                // console.log(star)
+                star.addEventListener('mouseover',function(){
+                    resetStar()
+                    // console.log(this)
+                    this.style.color = "yellow"
+                    //precedent star element in DOM
+                    let previousStar = this.previousElementSibling
+                    // console.log(previousStar);
+
+                    while (previousStar)
+                    {
+                        //precedent star in red
+                        previousStar.style.color = "yellow"
+                        //on recupere l'etoile qui la precède
+                        previousStar = previousStar.previousElementSibling;
+                    }
+                })
+
+                //on ecoute le click
+                star.addEventListener('click',function (){
+                    note.value = this.dataset.value
+                })
+
+                star.addEventListener('mouseout',function (){
+                    resetStar(note.value)
+                })
+            }
+
+            function resetStar(note = 0)
+            {
+                for (star of stars)
+                {
+                    if (star.dataset.value > note){
+                        star.style.color = "black";
+                    }else{
+                        star.style.color = "yellow"
+                    }
+                }
+            }
+        })
+
+    </script>
+
+
+{% endblock %}
