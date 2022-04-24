@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Entity\ProductStatus;
 use App\Entity\ProductSubCategory;
+use App\Entity\Tva;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -34,6 +35,10 @@ class ProductType extends AbstractType
                 'choice_label'=>'name'
             ])
             ->add('priceHt')
+            ->add('tva',EntityType::class,[
+                'class'=>Tva::class,
+                'choice_label'=>'rate'
+            ])
             ->add('name')
             ->add('description')
 
@@ -43,8 +48,12 @@ class ProductType extends AbstractType
 
 
             ])
-            ->add('promo',CheckboxType::class
-
+            ->add('promo',ChoiceType::class,[
+                'choices'=>[
+                    'Oui'=>true,
+                    'Non'=>false
+                ]
+                ]
             )
         ->add('images',CollectionType::class,[
         'entry_type'=>ImageType::class,

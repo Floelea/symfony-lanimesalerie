@@ -64,10 +64,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ProductReview::class, orphanRemoval: true)]
+    private $productReviews;
+
     public function __construct()
     {
         $this->address = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->productReviews = new ArrayCollection();
 
     }
 
@@ -331,6 +335,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductReview>
+     */
+    public function getProductReviews(): Collection
+    {
+        return $this->productReviews;
+    }
+
+    public function addProductReview(ProductReview $productReview): self
+    {
+        if (!$this->productReviews->contains($productReview)) {
+            $this->productReviews[] = $productReview;
+            $productReview->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductReview(ProductReview $productReview): self
+    {
+        if ($this->productReviews->removeElement($productReview)) {
+            // set the owning side to null (unless already changed)
+            if ($productReview->getUser() === $this) {
+                $productReview->setUser(null);
+            }
+        }
 
         return $this;
     }

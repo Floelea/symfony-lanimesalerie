@@ -54,12 +54,20 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private $productStatus;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductReview::class, orphanRemoval: true)]
+    private $productReviews;
+
+    #[ORM\ManyToOne(targetEntity: Tva::class, inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $tva;
+
 
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
+        $this->productReviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +241,48 @@ class Product
     public function setProductStatus(?ProductStatus $productStatus): self
     {
         $this->productStatus = $productStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductReview>
+     */
+    public function getProductReviews(): Collection
+    {
+        return $this->productReviews;
+    }
+
+    public function addProductReview(ProductReview $productReview): self
+    {
+        if (!$this->productReviews->contains($productReview)) {
+            $this->productReviews[] = $productReview;
+            $productReview->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductReview(ProductReview $productReview): self
+    {
+        if ($this->productReviews->removeElement($productReview)) {
+            // set the owning side to null (unless already changed)
+            if ($productReview->getProduct() === $this) {
+                $productReview->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTva(): ?Tva
+    {
+        return $this->tva;
+    }
+
+    public function setTva(?Tva $tva): self
+    {
+        $this->tva = $tva;
 
         return $this;
     }

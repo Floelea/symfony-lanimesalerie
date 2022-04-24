@@ -21,9 +21,17 @@ class AnimalCategory
     #[ORM\OneToMany(mappedBy: 'animalCategory', targetEntity: Product::class, orphanRemoval: true)]
     private $products;
 
+    #[ORM\OneToMany(mappedBy: 'animalCategory', targetEntity: ProductCategory::class)]
+    private $productCategories;
+
+    #[ORM\OneToMany(mappedBy: 'animalCategory', targetEntity: ProductSubCategory::class, orphanRemoval: true)]
+    private $productSubCategories;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->productCategories = new ArrayCollection();
+        $this->productSubCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +75,68 @@ class AnimalCategory
             // set the owning side to null (unless already changed)
             if ($product->getAnimalCategory() === $this) {
                 $product->setAnimalCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductCategory>
+     */
+    public function getProductCategories(): Collection
+    {
+        return $this->productCategories;
+    }
+
+    public function addProductCategory(ProductCategory $productCategory): self
+    {
+        if (!$this->productCategories->contains($productCategory)) {
+            $this->productCategories[] = $productCategory;
+            $productCategory->setAnimalCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductCategory(ProductCategory $productCategory): self
+    {
+        if ($this->productCategories->removeElement($productCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($productCategory->getAnimalCategory() === $this) {
+                $productCategory->setAnimalCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Collection<int, ProductSubCategory>
+     */
+    public function getProductSubCategories(): Collection
+    {
+        return $this->productSubCategories;
+    }
+
+    public function addProductSubCategory(ProductSubCategory $productSubCategory): self
+    {
+        if (!$this->productSubCategories->contains($productSubCategory)) {
+            $this->productSubCategories[] = $productSubCategory;
+            $productSubCategory->setAnimalCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductSubCategory(ProductSubCategory $productSubCategory): self
+    {
+        if ($this->productSubCategories->removeElement($productSubCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($productSubCategory->getAnimalCategory() === $this) {
+                $productSubCategory->setAnimalCategory(null);
             }
         }
 

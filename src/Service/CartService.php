@@ -38,9 +38,9 @@ class CartService
     {
         $total=0;
         foreach ($this->getCart() as $item){
-            $total+=($item['product']->getPriceHt() * $item['quantity']);
+            $total+=($item['product']->getPriceHt() * (1+$item['product']->getTva()->getRate()/100) * $item['quantity']);
         }
-        return $total;
+        return $total ;
     }
 
     public function addProduct(Product $product){

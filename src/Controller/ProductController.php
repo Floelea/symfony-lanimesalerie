@@ -2,9 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;use App\Entity\ProductCategory;use App\Form\ProductType;
+use App\Entity\Product;use App\Entity\ProductCategory;
+use App\Entity\ProductReview;
+use App\Form\ProductType;
 use App\Form\SearchProductType;
-use App\Repository\ProductRepository;use Doctrine\ORM\EntityManagerInterface;use Knp\Component\Pager\PaginatorInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ProductRepository;
+use App\Repository\ProductReviewRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;use
+    Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
@@ -26,10 +35,20 @@ class ProductController extends AbstractController
      * @param ProductRepository $productRepository
      * @return void
      */
-    public function show(Product $product)
+    public function show(Product $product,PaginatorInterface $paginator,ProductReviewRepository $repo,Request $request)
     {
+        $reviews = $paginator->paginate(
+            $reviews = $repo->findBy(['product'=> $product->getId()]),
+//        dd($reviews);
+            $request->query->getInt('page',1),
+            4
+        );
+
+
         return $this->render('product/show.html.twig',[
-            'product'=>$product
+            'product'=>$product,
+            'reviews'=>$reviews
+
         ]);
     }
 

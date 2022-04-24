@@ -25,6 +25,10 @@ class ProductSubCategory
     #[ORM\OneToMany(mappedBy: 'productSubCategory', targetEntity: Product::class, orphanRemoval: true)]
     private $product;
 
+    #[ORM\ManyToOne(targetEntity: AnimalCategory::class, inversedBy: 'productSubCategories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $animalCategory;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
@@ -85,6 +89,18 @@ class ProductSubCategory
                 $product->setProductSubCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAnimalCategory(): ?animalCategory
+    {
+        return $this->animalCategory;
+    }
+
+    public function setAnimalCategory(?animalCategory $animalCategory): self
+    {
+        $this->animalCategory = $animalCategory;
 
         return $this;
     }

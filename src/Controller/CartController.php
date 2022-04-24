@@ -18,6 +18,7 @@ class CartController extends AbstractController
         return $this->render('cart/index.html.twig', [
             'cartObject' => $cartService->getCart(),
             'total'=> $cartService->getTotal(),
+
 //            'addresses'=>$addresses
 
         ]);
@@ -32,7 +33,9 @@ class CartController extends AbstractController
     public function addProduct(CartService $cartService,Product $product,EntityManagerInterface $manager)
     {
         $cartService->addProduct($product);
+
         $cart = $cartService->isCartInDataBase();
+
         if(!$cart){
             $cart = new Cart();
             if($this->getUser()){
@@ -45,6 +48,7 @@ class CartController extends AbstractController
         $manager->persist($cart);
         $manager->flush();
         return $this->redirectToRoute('cart');
+
     }
 
     /**
