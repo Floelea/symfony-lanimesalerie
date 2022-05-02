@@ -31,21 +31,23 @@
                     {% set average = sum / length %}
                 {% endfor %}
                 {% if length == 0 %}
-                    <a href="{{ path('review',{id:product.id}) }}" class="btn btn-info mb-3 text-white">Soyez le premier a donner votre avis</a>
+                    {% if app.user %}
+                        <a href="{{ path('review',{id:product.id}) }}" class="btn btn-info mb-3 text-white">Soyez le premier a donner votre avis</a>
+                    {% endif %}
                 {% elseif average == 5 and average >= 4.01 %}
-                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><p class="m-0 mx-3 average "><strong>{{ average }}</strong>/5</p>
+                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><p class="m-0 mx-3 average "><strong>{{ average|round(1) }}</strong>/5</p>
                     <a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
                 {% elseif average <= 4 and average >= 3.01%}
-                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average "><strong>{{ average }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
+                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average "><strong>{{ average|round(1) }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
                         {% elseif average <= 4 and average >= 3.01%}
                 {% elseif average <= 3 and average >= 2.01 %}
-                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average"><strong>{{ average }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
+                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average"><strong>{{ average|round(1) }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
                         {% elseif average <= 4 and average >= 3.01%}
                 {% elseif average <= 2 and average >=1.01%}
-                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average"><strong>{{ average }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
+                <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average"><strong>{{ average|round(1) }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
                         {% elseif average <= 4 and average >= 3.01%}
                 {% elseif average >0.1 and average <= 1 %}
-                    <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average"><strong>{{ average }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
+                    <div class="d-flex align-items-center mb-3"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><p class="m-0 mx-3 average"><strong>{{ average|round(1) }}</strong>/5</p><a href="" class="text-black text-decoration-underline averageLink">Lire les {{ product.productReviews|length }} avis</a></div>
                         {% elseif average <= 4 and average >= 3.01%}
                 {% endif %}
 
@@ -71,7 +73,11 @@
                     <i class="fab fa-pinterest-square fs-2 me-2"></i>
                     <i class="fab fa-twitter-square fs-2"></i>
                 </div>
-                <a href="{{ path('review',{id:product.id}) }}" class="myButton btn-success d-flex justify-content-center">Evaluez le produit</a>
+                {% if app.user %}
+                    <a href="{{ path('review',{id:product.id}) }}" class="myButton btn-success d-flex justify-content-center">Evaluez le produit</a>
+                    {% else %}
+                        <a href="{{ path('signin') }}" class="myButton btn-success d-flex justify-content-center">Connectez vous vous evaluer le produit</a>
+                {% endif %}
             </div>
         </div>
     </div>

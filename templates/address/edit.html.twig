@@ -4,37 +4,55 @@
 {% form_theme formAddressEdit 'bootstrap_5_layout.html.twig' %}
 {% block body %}
 
+    <div class="row">
+        <div class="col-2 ps-5 pt-5" style="background:linear-gradient(to bottom,black,white)">
+            <a href="{{ path('user_edit') }}" class="d-flex align-items-center mb-3"><i class="fa-regular fa-user me-2 text-white"></i><p class="m-0 text-white">Modifier mon profil</p></a>
+            <a href="{{ path('app_address') }}" class="d-flex align-items-center mb-3"><i class="fa-regular fa-address-book me-2 text-white"></i><p class="m-0 text-white">Mes adresses</p></a>
+            <a href="{{ path('user_order') }}" class="d-flex align-items-center mb-3"><i class="fa-regular fa-clipboard me-2 text-white"></i><p class="m-0 text-white">Mes commandes</p></a>
 
-    <div class="container userInfo">
-        <div class="row mt-5 container">
-            <div class="col-3 p-0 d-flex flex-column align-items-center">
-                <div class="mt-4">
-                    <a href="{{ path('user_edit') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-user me-2"></i><p class="m-0">Modifier mon profil</p></a>
-                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-address-book me-2"></i><p class="m-0">Mes adresses</p></a>
-                    <a href="{{ path('new_user_address') }}" class="d-flex align-items-center m-3 ms-5 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Nouvelle adresse</p></a>
-                    <a href="{{ path('user_order') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-clipboard me-2"></i><p class="m-0">Mes commandes</p></a>
-                </div>
-
-            </div>
-            <div class="col-9 p-0">
-                <div class="bg-white m-4">
-                    <div class="px-4">
-                        <div class="">
-                            <h5 class="pt-2 fw-bold">Modification d'adresse</h5>
-                        </div>
-                        <div class="py-3">
-                                {{ form_start(formAddressEdit) }}
-                                {{ form_row(formAddressEdit.number) }}
-                                {{ form_row(formAddressEdit.street) }}
-                                {{ form_row(formAddressEdit.postalCode) }}
-                                {{ form_row(formAddressEdit.city) }}
-                                <button type="submit" class="btn btn-success">Modifier</button>
-                                {{ form_end(formAddressEdit) }}
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="col-10" style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
+            <div class="py-3 registerFrom my-5">
+                {{ form_start(formAddressEdit) }}
+                {{ form_row(formAddressEdit.number) }}
+                {{ form_row(formAddressEdit.street) }}
+                {{ form_row(formAddressEdit.postalCode) }}
+                {{ form_row(formAddressEdit.city) }}
+                <button type="submit" class="btn btn-success">Modifier</button>
+                {{ form_end(formAddressEdit) }}
             </div>
         </div>
     </div>
+{#    <div class="container userInfo">#}
+{#        <div class="row mt-5 container">#}
+{#            <div class="col-3 p-0 d-flex flex-column align-items-center">#}
+{#                <div class="mt-4">#}
+{#                    <a href="{{ path('user_edit') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-user me-2"></i><p class="m-0">Modifier mon profil</p></a>#}
+{#                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-address-book me-2"></i><p class="m-0">Mes adresses</p></a>#}
+{#                    <a href="{{ path('new_user_address') }}" class="d-flex align-items-center m-3 ms-5 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Nouvelle adresse</p></a>#}
+{#                    <a href="{{ path('user_order') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-clipboard me-2"></i><p class="m-0">Mes commandes</p></a>#}
+{#                </div>#}
+
+{#            </div>#}
+{#            <div class="col-9 p-0">#}
+{#                <div class="bg-white m-4">#}
+{#                    <div class="px-4">#}
+{#                        <div class="">#}
+{#                            <h5 class="pt-2 fw-bold">Modification d'adresse</h5>#}
+{#                        </div>#}
+{#                        <div class="py-3">#}
+{#                                {{ form_start(formAddressEdit) }}#}
+{#                                {{ form_row(formAddressEdit.number) }}#}
+{#                                {{ form_row(formAddressEdit.street) }}#}
+{#                                {{ form_row(formAddressEdit.postalCode) }}#}
+{#                                {{ form_row(formAddressEdit.city) }}#}
+{#                                <button type="submit" class="btn btn-success">Modifier</button>#}
+{#                                {{ form_end(formAddressEdit) }}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
 {% endblock %}

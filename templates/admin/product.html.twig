@@ -4,66 +4,73 @@
 {% form_theme formSearchProduct 'bootstrap_5_layout.html.twig' %}
 {% block body %}
 
-    <div class="container userInfo">
-        <div class="row my-5 container">
-            <div class="col-3 p-0 d-flex flex-column align-items-center">
-                <div class="mt-4">
-                    <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
-                    <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
-                    <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
-                    <a href="{{ path('new_product') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
-                    <a href="{{ path('admin_category') }}" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="far fa-folder-open me-2"></i><p class="m-0">Catégories</p></a>
-                    <a href="{{ path('new_productCategory') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
-                    <a href="{{ path('admin_subCategory') }}" class="d-flex align-items-center m-3 ms-4 newAddress"><i class="fa-regular fa-file me-2"></i><p class="m-0">Sous-catégories</p></a>
-                    <a href="{{ path('product_sub_category_new') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">New</p></a>
+    <div class="row">
+        <div class="col-2 ps-5 pt-5" style="background:linear-gradient(to bottom,black,white)">
+
+            <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3 text-white"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
+            <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3 text-white"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
+            <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3 text-white"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
+            <a href="{{ path('new_product') }}" class="d-flex align-items-center m-3 ms-5 newProduct text-white"><p class="me-2 m-0">+</p><p class="m-0">Nouveau</p></a>
+            <a href="{{ path('admin_category') }}" class="d-flex align-items-center m-3 ms-4 newAddress text-white"><i class="far fa-folder-open me-2"></i><p class="m-0">Catégories</p></a>
+            <a href="{{ path('new_productCategory') }}" class="d-flex align-items-center m-3 ms-5 newProduct text-white"><p class="me-2 m-0">+</p><p class="m-0">Nouvelle</p></a>
+            <a href="{{ path('admin_subCategory') }}" class="d-flex align-items-center m-3 ms-4 newAddress text-white"><i class="fa-regular fa-file me-2"></i><p class="m-0">Sous-catégories</p></a>
+            <a href="{{ path('product_sub_category_new') }}" class="d-flex align-items-center m-3 ms-5 newProduct text-white"><p class="me-2 m-0">+</p><p class="m-0">Nouvelle</p></a>
+        </div>
+        <div class="col-10 d-flex align-items-center flex-column" style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
+
+            <p class="textAnimesalerie fs-1 text-white mb-2">ESPACE ADMINISTRATEUR</p>
+
+
+            <div class= "m-4 registerFrom col-10">
+                <p class="text-white fs-5 pb-3 fw-bolder text-uppercase">Rechercher un produit</p>
+                {{ form_start(formSearchProduct) }}
+                {{ form_row(formSearchProduct.animalCategory) }}
+                {{ form_row(formSearchProduct.productCategory) }}
+                {{ form_row(formSearchProduct.productSubCategory) }}
+                <div class="d-flex flex-column">
+                    <button type="submit" class="btn btn-success">Recherche</button>
                 </div>
 
-            </div>
-            <div class="col-9 p-0">
-                <div class="bg-white m-4">
-                    <div class="px-4">
-                        <div class="">
-                            <h5 class="pt-2 fw-bold">Rechercher un produit</h5>
-                        </div>
-                        <div class="py-3">
-                            {{ form_start(formSearchProduct) }}
-                            <button type="submit" class="btn btn-success">Recherche</button>
-                            {{ form_end(formSearchProduct) }}
-                            <table class="table table-striped">
-                                <thead class="align-items-center">
-                                <tr style="font-size: 13px">
-                                    <th>Image</th>
-                                    <th>Nom</th>
-                                    <th>Prix Ht</th>
-                                    <th>Crée le</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for product in products %}
-                                    <tr>
-                                        {% for image in product.images %}
-                                            {% if loop.first %}
-                                                <td><img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top " alt="..." style="width: 50px"></td>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <td>{{ product.name }}</td>
-                                        <td>{{ product.priceHt }}</td>
-                                        <td>{{ product.createdAt|date('d/m/Y')}}</td>
-                                        <td>
-                                            <a href="{{ path('edit_product',{id:product.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a href="{{ path('delete_product',{id:product.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                {{ form_end(formSearchProduct) }}
+                {% if products %}
+                <table class="table table-striped mt-4">
+                    <thead class="align-items-center">
+                    <tr style="font-size: 13px">
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix Ht</th>
+                        <th>Crée le</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% endif %}
+
+                    {% for product in products %}
+                    <tr>
+                        {% for image in product.images %}
+                            {% if loop.first %}
+                                <td><img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top " alt="..." style="width: 50px"></td>
+                            {% endif %}
+                        {% endfor %}
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.priceHt }}</td>
+                        <td>{{ product.createdAt|date('d/m/Y')}}</td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="{{ path('edit_product',{id:product.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="{{ path('delete_product',{id:product.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                            </div>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+
+
 
 {% endblock %}

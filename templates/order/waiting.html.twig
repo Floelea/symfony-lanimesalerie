@@ -3,74 +3,66 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
+    <div class="row">
+        <div class="col-2 ps-5 pt-5" style="background:linear-gradient(to bottom,black,white)">
 
-    <div class="container userInfo">
-        <div class="row my-5 container">
-            <div class="col-3 p-0 d-flex flex-column align-items-center">
-                <div class="mt-4">
-                    <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
-                    <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
-                    <a href="{{ path('order_waiting') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-regular fa-circle-pause me-2"></i><p class="m-0">En cours</p></a>
-                    <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
-                </div>
+            <a href="{{ path('admin_user') }}" class="d-flex align-items-center mb-3"><i class="far fa-user me-2 text-white"></i><p class="m-0 text-white">Clients</p></a>
+            <a href="{{ path('admin_order') }}" class="d-flex align-items-center mb-3"><i class="fas fa-shipping-fast me-2 text-white"></i><p class="m-0 text-white">Commandes</p></a>
+            <a href="{{ path('order_waiting') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-regular fa-circle-pause me-2 text-white"></i><p class="m-0 text-white">En cours</p></a>
 
-            </div>
-            <div class="col-9 p-0">
-                <div class="bg-white m-4">
-                    <div class="px-4">
-                        <div class="">
-                            <h5 class="pt-2 fw-bold">Commande en attente</h5>
-                        </div>
-                        <div class="py-3">
-                            {% if ords %}
-                            <table class="table table-striped">
-                                <thead class="align-items-center">
-                                <tr style="font-size: 13px">
-                                    <th>Username</th>
-                                    <th>Date</th>
-                                    <th>Montant</th>
-                                    <th>Paiement</th>
-                                    <th>Statut</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for ord in ords %}
-                                <tr>
-                                    <td>{{ ord.user.username }}</td>
-                                    <td>{{ ord.createdAt|date('d/m/Y') }}</td>
-                                    <td>{{ ord.total }}</td>
-                                    <td>{{ ord.payment.name }}</td>
-                                    <td>En cours</td>
+            <a href="{{ path('admin_product') }}" class="d-flex align-items-center mb-3"><i class="fas fa-barcode me-2 text-white"></i><p class="m-0 text-white">Produits</p></a>
+        </div>
+        <div class="col-10 d-flex align-items-center flex-column" style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
+
+            <p class="textAnimesalerie fs-1 text-white mb-2">ESPACE ADMINISTRATEUR</p>
 
 
-                                    <td>
-                                        <a href="{{ path('order_edit',{id:ord.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="{{ path('delete_order',{id:ord.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                                {% else %}
-                                <p>Aucune commande en attente</p>
-                            {% endif %}
+            <div class="bg-white m-4 displayUserProfile col-10 ">
+                <div class="px-4">
+                    <div class="">
+                        <h5 class="">Commande en attente</h5>
+                    </div>
+                    <div class="py-3">
+                        {% if ords %}
+                                                    <table class="table table-striped">
+                                                        <thead class="align-items-center">
+                                                        <tr style="font-size: 13px">
+                                                            <th>Username</th>
+                                                            <th>Date</th>
+                                                            <th>Montant</th>
+                                                            <th>Paiement</th>
+                                                            <th>Statut</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for ord in ords %}
+                                                        <tr>
+                                                            <td><em>{{ ord.user.username }}</em></td>
+                                                            <td><em>{{ ord.createdAt|date('d/m/Y') }}</em></td>
+                                                            <td><em>{{ ord.total }}<sup>€</sup></em></td>
+                                                            <td><em>{{ ord.payment.name }}</em></td>
+                                                            <td><em>En cours</em></td>
 
 
+                                                            <td>
+                                                                <a href="{{ path('order_edit',{id:ord.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                                <a href="{{ path('delete_order',{id:ord.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <p>Aucune commande en attente</p>
+                                                    {% endif %}
+
+                                                        </tbody>
+                                                    </table>
 
 
-
-
-
-
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+
 
 {% endblock %}

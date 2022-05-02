@@ -4,63 +4,67 @@
 
 {% block body %}
 
-    <div class="container userInfo">
-        <div class="row my-5 container">
-            <div class="col-3 p-0 d-flex flex-column align-items-center">
-                <div class="mt-4">
-                    <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
-                    <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
-                    <a href="{{ path('order_waiting') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-regular fa-circle-pause me-2"></i><p class="m-0">En cours</p></a>
-                    <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
-                </div>
 
-            </div>
-            <div class="col-9 p-0">
-                <div class="bg-white m-4">
-                    <div class="px-4">
-                        <div class="">
-                            <h5 class="pt-2 fw-bold">Commande de la semaine</h5>
-                        </div>
-                        <div class="py-3">
-                            <table class="table table-striped">
-                                <thead class="align-items-center">
-                                <tr style="font-size: 13px">
-                                    <th>Username</th>
-                                    <th>Date</th>
-                                    <th>Montant</th>
-                                    <th>Paiement</th>
-                                    <th>Statut</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for newOrder in newOrders %}
-                                    <tr>
-                                        <td>{{ newOrder.user.username }}</td>
-                                        <td>{{ newOrder.createdAt|date('d/m/Y') }}</td>
-                                        <td>{{ newOrder.total }}</td>
-                                        <td>{{ newOrder.payment.name }}</td>
-                                        {% if newOrder.orderStatus == null %}
-                                            <td>En cours</td>
-                                            <td>
-                                                <a href="{{ path('order_edit',{id:newOrder.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="{{ path('delete_order',{id:newOrder.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
-                                            </td>
-                                        {% else %}
-                                            <td>{{ newOrder.orderStatus.status }}</td>
-                                        {% endif %}
+    <div class="row">
+        <div class="col-2 ps-5 pt-5" style="background:linear-gradient(to bottom,black,white)">
+
+            <a href="{{ path('admin_user') }}" class="d-flex align-items-center mb-3"><i class="far fa-user me-2 text-white"></i><p class="m-0 text-white">Clients</p></a>
+            <a href="{{ path('admin_order') }}" class="d-flex align-items-center mb-3"><i class="fas fa-shipping-fast me-2 text-white"></i><p class="m-0 text-white">Commandes</p></a>
+            <a href="{{ path('order_waiting') }}" class="d-flex align-items-center m-3 ms-5 newProduct"><i class="fa-regular fa-circle-pause me-2 text-white"></i><p class="m-0 text-white">En cours</p></a>
+
+            <a href="{{ path('admin_product') }}" class="d-flex align-items-center mb-3"><i class="fas fa-barcode me-2 text-white"></i><p class="m-0 text-white">Produits</p></a>
+        </div>
+        <div class="col-10 d-flex align-items-center flex-column" style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
+
+            <p class="textAnimesalerie fs-1 text-white mb-2">ESPACE ADMINISTRATEUR</p>
 
 
+            <div class="bg-white m-4 displayUserProfile col-10 ">
+                <div class="px-4">
+                    <div class="">
+                        <h5 class="">Commande de la semaine</h5>
+                    </div>
+                    <div class="py-3">
 
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="table table-striped">
+                                                            <thead class="align-items-center">
+                                                            <tr style="font-size: 13px">
+                                                                <th>Username</th>
+                                                                <th>Date</th>
+                                                                <th>Montant</th>
+                                                                <th>Paiement</th>
+                                                                <th>Statut</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for newOrder in newOrders %}
+                                                                <tr>
+                                                                    <td><em>{{ newOrder.user.username }}</em></td>
+                                                                    <td><em>{{ newOrder.createdAt|date('d/m/Y') }}</em></td>
+                                                                    <td><em>{{ newOrder.total }}</em><sup>€</sup></td>
+                                                                    <td><em>{{ newOrder.payment.name }}</em></td>
+                                                                    {% if newOrder.orderStatus == null %}
+                                                                        <td><em>En cours</em></td>
+                                                                        <td>
+                                                                            <a href="{{ path('order_edit',{id:newOrder.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                                            <a href="{{ path('delete_order',{id:newOrder.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                                        </td>
+                                                                    {% else %}
+                                                                        <td>{{ newOrder.orderStatus.status }}</td>
+                                                                    {% endif %}
+
+
+
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+
 
 {% endblock %}

@@ -10,5 +10,8 @@
   "build/images/registration.jpg": "http://localhost:8080/build/images/registration.8c677de0.jpg",
   "build/images/photo-1535930749574-1399327ce78f.jpg": "http://localhost:8080/build/images/photo-1535930749574-1399327ce78f.7b6d627c.jpg",
   "build/fonts/spaceage.ttf": "http://localhost:8080/build/fonts/spaceage.ee424267.ttf",
-  "build/images/emptyCart.png": "http://localhost:8080/build/images/emptyCart.04154fa8.png"
+  "build/images/emptyCart.png": "http://localhost:8080/build/images/emptyCart.04154fa8.png",
+  "build/images/securitydog.jpg": "http://localhost:8080/build/images/securitydog.8bd920a2.jpg",
+  "build/vendors-node_modules_core-js_modules_es_array_for-each_js-node_modules_core-js_modules_es_obj-f9f214.js": "http://localhost:8080/build/vendors-node_modules_core-js_modules_es_array_for-each_js-node_modules_core-js_modules_es_obj-f9f214.js",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-bc0012.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-bc0012.js"
 }

@@ -7,6 +7,9 @@
     <div class="registration">
         <div class="registerFrom">
             {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.gender, {
+                label: 'Genre'
+            })  }}
             {{ form_row(registrationForm.name, {
                 label: 'Prénom'
             })  }}

@@ -4,40 +4,33 @@
 
 {% block body %}
 
-
-
-    <div class="container userInfo">
-        <div class="row mt-5 container">
-            <div class="col-3 p-0 d-flex flex-column align-items-center">
-                <div class="mt-4">
-                    <a href="{{ path('user_edit') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-user me-2"></i><p class="m-0">Modifier mon profil</p></a>
-                    <a href="{{ path('app_address') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-address-book me-2"></i><p class="m-0">Mes adresses</p></a>
-                    <a href="{{ path('new_user_address') }}" class="d-flex align-items-center m-3 ms-5 newAddress"><i class="fa-solid fa-folder-plus me-2"></i><p class="m-0">Nouvelle adresse</p></a>
-                    <a href="{{ path('user_order') }}" class="d-flex align-items-center m-3"><i class="fa-regular fa-clipboard me-2"></i><p class="m-0">Mes commandes</p></a>
-                </div>
-
-            </div>
-            <div class="col-9 p-0">
-                <div class="bg-white m-4">
-                    <div class="px-4">
-                        <div class="">
-                            <h5 class="pt-2 fw-bold">Mes adresses</h5>
-                        </div>
-                        <div class="py-3">
-                            {% if app.user.address|length == 0 %}
+    <div class="row">
+        <div class="col-2 ps-5 pt-5" style="background:linear-gradient(to bottom,black,white)">
+            <a href="{{ path('user_edit') }}" class="d-flex align-items-center mb-3"><i class="fa-regular fa-user me-2 text-white"></i><p class="m-0 text-white">Modifier mon profil</p></a>
+            <a href="{{ path('app_address') }}" class="d-flex align-items-center mb-3"><i class="fa-regular fa-address-book me-2 text-white"></i><p class="m-0 text-white">Mes adresses</p></a>
+            <a href="{{ path('new_user_address') }}" class="d-flex align-items-center m-3 ms-4 newAddress"><p class="text-white me-2 m-0">+</p><p class="m-0 text-white">Nouvelle adresse</p></a>
+            <a href="{{ path('user_order') }}" class="d-flex align-items-center mb-3"><i class="fa-regular fa-clipboard me-2 text-white"></i><p class="m-0 text-white">Mes commandes</p></a>
+        </div>
+        <div class="col-10 d-flex justify-content-center" style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
+            <div class="bg-white m-4 displayUserProfile col-8">
+                <div class="px-4">
+                    <div class="">
+                        <h5 class="">Mes adresses</h5>
+                    </div>
+                    <div class="py-3 ">
+                        {% if app.user.address|length == 0 %}
                             <a href="{{ path('new_user_address') }}" class="btn btn-success">Enregistrez une première adresse...</a>
-                            {% else %}
+                        {% else %}
                             {% for address in app.user.address %}
-                                <div class="mb-4">
-                                    <div class="mb-2">
-                                        {{ loop.index }} - {{ address.number }} {{ address.street }} {{ address.postalCode }} {{ address.city }}
-                                    </div>
-                                        <a href="{{ path('userAddress_edit',{id:address.id}) }}" class="btn btn-warning">Modifier</a>
-                                        <a href="{{ path('userAddress_delete',{id:address.id}) }}" class="btn btn-danger">Supprimer</a>
+                            <div class="mb-4">
+                                <div class="mb-2">
+                                    {{ loop.index }} - {{ address.number }} {{ address.street }} {{ address.postalCode }} {{ address.city }}
                                 </div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
+                                <a href="{{ path('userAddress_edit',{id:address.id}) }}" class="btn btn-warning">Modifier</a>
+                                <a href="{{ path('userAddress_delete',{id:address.id}) }}" class="btn btn-danger">Supprimer</a>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>

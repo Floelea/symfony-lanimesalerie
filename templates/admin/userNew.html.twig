@@ -4,40 +4,82 @@
 
 {% block body %}
 
-<div class="container userInfo">
-    <div class="row my-5 container">
-        <div class="col-3 p-0 d-flex flex-column align-items-center">
-            <div class="mt-4">
-                <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>
-                <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>
-                <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>
-            </div>
+    <div class="row">
+        <div class="col-2 ps-5 pt-5" style="background:linear-gradient(to bottom,black,white)">
 
+            <a href="{{ path('admin_user') }}" class="d-flex align-items-center mb-3"><i class="far fa-user me-2 text-white"></i><p class="m-0 text-white">Clients</p></a>
+            <a href="{{ path('admin_order') }}" class="d-flex align-items-center mb-3"><i class="fas fa-shipping-fast me-2 text-white"></i><p class="m-0 text-white">Commandes</p></a>
+            <a href="{{ path('admin_product') }}" class="d-flex align-items-center mb-3"><i class="fas fa-barcode me-2 text-white"></i><p class="m-0 text-white">Produits</p></a>
         </div>
-        <div class="col-9 p-0">
-            <div class="bg-white m-4">
-                <div class="px-4">
-                    <div class="">
-                        <h5 class="pt-2 fw-bold">Créer un nouveau client</h5>
-                    </div>
-                    <div class="py-3">
-                        {{ form_start(registrationForm) }}
-                        {{ form_row(registrationForm.name) }}
-                        {{ form_row(registrationForm.last_name) }}
-                        {{ form_row(registrationForm.birthDay) }}
-                        {{ form_row(registrationForm.username) }}
-                        {{ form_row(registrationForm.plainPassword, {
-                            label: 'Password'
-                        }) }}
-                        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="col-10  " style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
 
-                        <button type="submit" class="btn">Register</button>
-                        {{ form_end(registrationForm) }}
-                    </div>
+
+            <p class="textAnimesalerie fs-1 text-white mb-2 text-center">ESPACE ADMINISTRATEUR</p>
+
+            <div class="py-3 registerFrom my-5">
+                <p class="text-white fs-5 pb-3 fw-bolder text-uppercase">Nouveau client</p
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.gender, {
+                    label: 'Genre'
+                })  }}
+                {{ form_row(registrationForm.name, {
+                    label: 'Prénom'
+                })  }}
+                {{ form_row(registrationForm.last_name, {
+                    label: 'Nom'
+                })  }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.birthDay) }}
+
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+                <div class="d-flex flex-column">
+                    <button type="submit" class="btn btn-success">Créer votre compte</button>
                 </div>
-            </div>
+
+                {{ form_end(registrationForm) }}
+
+
+
         </div>
     </div>
-</div>
-<script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>
+{#<div class="container userInfo">#}
+{#    <div class="row my-5 container">#}
+{#        <div class="col-3 p-0 d-flex flex-column align-items-center">#}
+{#            <div class="mt-4">#}
+{#                <a href="{{ path('admin_user') }}" class="d-flex align-items-center m-3"><i class="far fa-user me-3"></i><p class="m-0">Clients</p></a>#}
+{#                <a href="{{ path('admin_order') }}" class="d-flex align-items-center m-3"><i class="fas fa-shipping-fast me-3"></i><p class="m-0">Commandes</p></a>#}
+{#                <a href="{{ path('admin_product') }}" class="d-flex align-items-center m-3"><i class="fas fa-barcode me-3"></i><p class="m-0">Produits</p></a>#}
+{#            </div>#}
+
+{#        </div>#}
+{#        <div class="col-9 p-0">#}
+{#            <div class="bg-white m-4">#}
+{#                <div class="px-4">#}
+{#                    <div class="">#}
+{#                        <h5 class="pt-2 fw-bold">Créer un nouveau client</h5>#}
+{#                    </div>#}
+{#                    <div class="py-3">#}
+{#                        {{ form_start(registrationForm) }}#}
+{#                        {{ form_row(registrationForm.name) }}#}
+{#                        {{ form_row(registrationForm.last_name) }}#}
+{#                        {{ form_row(registrationForm.birthDay) }}#}
+{#                        {{ form_row(registrationForm.username) }}#}
+{#                        {{ form_row(registrationForm.plainPassword, {#}
+{#                            label: 'Password'#}
+{#                        }) }}#}
+{#                        {{ form_row(registrationForm.agreeTerms) }}#}
+
+{#                        <button type="submit" class="btn">Register</button>#}
+{#                        {{ form_end(registrationForm) }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<script src="https://kit.fontawesome.com/e772130b79.js" crossorigin="anonymous"></script>#}
 {% endblock %}

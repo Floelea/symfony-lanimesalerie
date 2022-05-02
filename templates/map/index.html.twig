@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MapController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-6">
+            <div id="map"></div>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+
+
+    <script>
+
+        function initMap() {
+            // The location of Animalerie
+            const animalerie = { lat: 43.8077156, lng: 4.3248652 };
+            // The map, centered at Animalerie
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: animalerie,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: animalerie,
+                map: map,
+            });
+        }
+
+
+    </script>
+{% endblock %}

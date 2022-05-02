@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchBarController!{% endblock %}
+
+{% block body %}
+
+            <div class="container py-5">
+                <div class="d-flex justify-content-between inputResult align-items-center px-5 py-4">
+                    <p class="text-uppercase fs-3 textAnimesalerie m-0">{{ input }}</p>
+                    <div class="d-flex">
+                        <h5 class="m-0">Résultats : {{ howManyProductsFind }}</h5>
+                    </div>
+                </div>
+
+                    <!-------------CARDS ARTICLES------------->
+                    <div class="container cardArticle my-5">
+                        <div class="row m-0">
+                            {% for product in productsFind %}
+                                <div class="col-3 oneArticle p-0">
+                                    {% if app.user %}
+                                        <div class="d-flex justify-content-end">
+                                            {#                        <a href="{{ path('like',{id:product.id}) }}" class="like">like</a>#}
+                                            <a href="{{ path('like',{id:product.id}) }}" class=" like btn btn-{% if (product.isLikedBy(app.user)) %}success{% else %}secondary{% endif %}"><i class="fa-solid fa-heart count"></i></a>
+
+                                        </div>
+                                    {% endif %}
+
+
+                                    {% for image in product.images %}
+                                        {% if loop.first %}
+                                            <div class="d-flex justify-content-center mb-3">
+                                                <a href="{{ path('product_show',{id:product.id}) }}" ><img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="card-img-top" alt="..."></a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <p class="text-center nameCard my-3 text-uppercase">{{ product.name }}</p>
+                                    {% set sum = 0 %}
+                                    {% set  length = 0%}
+                                    {% set average = 0 %}
+                                    {% for i in product.productReviews %}
+                                        {% set sum = sum + i.note   %}
+                                        {% set length = length + i|length %}
+                                        {% set average = sum / length %}
+                                    {% endfor %}
+
+
+                                    {% if length == 0 %}
+                                        {% if app.user %}
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{ path('review',{id:product.id}) }}" class="btn btn-info mb-3 text-white fs-6 " style="width: 70%">Donner votre avis</a>
+                                            </div>
+                                        {% else %}
+                                            <p class="text-center nameCard my-3 text-uppercase">AUCUN AVIS</p>
+                                        {% endif %}
+                                    {% elseif average == 5 and average >= 4.01 %}
+                                        <div class="d-flex justify-content-center my-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i>
+                                            <a href="" class="text-black  averageLink ms-3">({{ product.productReviews|length }})</a></div>
+                                    {% elseif average <= 4 and average >= 3.01%}
+                                        <div class="d-flex justify-content-center my-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black  averageLink ms-3">({{ product.productReviews|length }})</a></div>
+                                    {% elseif average <= 4 and average >= 3.01%}
+                                    {% elseif average <= 3 and average >= 2.01 %}
+                                        <div class="d-flex justify-content-center my-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black  averageLink ms-3">({{ product.productReviews|length }})</a></div>
+                                    {% elseif average <= 4 and average >= 3.01%}
+                                    {% elseif average <= 2 and average >=1.01%}
+                                        <div class="d-flex justify-content-center my-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black  averageLink ms-3">({{ product.productReviews|length }})</a></div>
+                                    {% elseif average <= 4 and average >= 3.01%}
+                                    {% elseif average >0.1 and average <= 1 %}
+                                        <div class="d-flex justify-content-center my-4"><i class="fa-regular fa-star text-warning" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><i class="fa-regular fa-star text-black" ></i><a href="" class="text-black  averageLink ms-3">({{ product.productReviews|length }})</a></div>
+                                    {% elseif average <= 4 and average >= 3.01%}
+                                    {% endif %}
+
+
+                                    <div class="d-flex align-items-center justify-content-around mb-3">
+                                        <p class="m-0 priceCard">{{ product.priceHt * (1+(product.tva.rate/100)) }}<sup>€</sup></p>
+                                        <a href="{{ path('cart_add',{id:product.id}) }}"><i class="fa-solid fa-cart-arrow-down basketCard"></i></a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+            </div>
+{% endblock %}
