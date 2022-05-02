@@ -65,8 +65,8 @@ class RegistrationController extends AbstractController
             $user->setIsVerified(true);
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('home');
             $this->addFlash("success","Compte validé");
+            return $this->redirectToRoute('home');
         }else{
             $this->addFlash("error","Ce compte n'existe pas");
             return $this->redirectToRoute('home');

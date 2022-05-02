@@ -31,6 +31,7 @@ class CartService
             ];
             $cartObject[]=$item;
         }
+//        dd($cartObject);
         return $cartObject;
     }
 

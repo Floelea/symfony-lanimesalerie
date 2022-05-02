@@ -67,11 +67,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: ProductReview::class, orphanRemoval: true)]
     private $productReviews;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
+    private $likes;
+
+    #[ORM\ManyToOne(targetEntity: Gender::class, inversedBy: 'user')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $gender;
+
     public function __construct()
     {
         $this->address = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->productReviews = new ArrayCollection();
+        $this->likes = new ArrayCollection();
 
     }
 
@@ -365,6 +373,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $productReview->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

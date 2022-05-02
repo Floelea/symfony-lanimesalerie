@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ProductCategory;use App\Form\ProductCategoryType;
+use App\Repository\AnimalCategoryRepository;
 use App\Repository\ProductCategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\Request;use Symfony\Component\HttpFoundation\Response;use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +13,10 @@ class ProductCategoryController extends AbstractController
     public function index(ProductCategoryRepository $productCategoryRepository): Response
     {
         $categories = $productCategoryRepository->findAll();
+
         return $this->render('admin/index.html.twig', [
             'categories' => $categories,
+
         ]);
     }
 
@@ -22,11 +25,13 @@ class ProductCategoryController extends AbstractController
      * @param ProductCategoryRepository $productCategoryRepository
      * @return Response
      */
-    public function productCategory(ProductCategoryRepository $productCategoryRepository)
+    public function productCategory(AnimalCategoryRepository $animalCategoryRepository)
     {
-        $categories = $productCategoryRepository->findAll();
+
+        $animals = $animalCategoryRepository->findAll();
         return $this->render('admin/category.html.twig',[
-            'categories'=>$categories
+
+            'animals'=>$animals
         ]);
     }
 

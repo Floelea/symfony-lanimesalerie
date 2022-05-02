@@ -66,6 +66,19 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param $criteria
+     * @return float|int|mixed|string
+     */
+    public function searchBar($criteria)
+    {
+        $query = $this->createQueryBuilder('p');
+        if ($criteria != null){
+            $query->where('p.description LIKE :val')
+                ->setParameter(':val','%'.$criteria.'%');
+        }
+        return $query->getQuery()->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Product

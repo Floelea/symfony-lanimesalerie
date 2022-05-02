@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -13,15 +14,19 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups('post:read')]
+
     private $id;
 
     #[ORM\Column(type: 'float')]
     private $priceHt;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups('post:read')]
     private $name;
 
     #[ORM\Column(type: 'text')]
+    #[Groups('post:read')]
     private $description;
 
     #[ORM\ManyToOne(targetEntity: AnimalCategory::class, inversedBy: 'products')]
@@ -61,6 +66,9 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private $tva;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Like::class, orphanRemoval: true)]
+    private $likes;
+
 
 
     public function __construct()
@@ -68,6 +76,7 @@ class Product
         $this->images = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
         $this->productReviews = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,5 +296,46 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getProduct() === $this) {
+                $like->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLikedBy(User $userConnecte){
+
+        foreach ($this->likes as $like ){
+
+            if($userConnecte == $like->getUser()){
+                return true;
+            }
+        }
+        return false;
+
+    }
 
 }

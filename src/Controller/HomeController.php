@@ -25,12 +25,17 @@ class HomeController extends AbstractController
             $request->query->getInt('page',1),
             4
         );
-
+        $productsInProm = $paginator->paginate(
+            $productRepository->findBy(['promo'=> true]),
+//          dd($productsInProm);
+            $request->query->getInt('page',1),
+            4
+        );
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
             'products'=>$products,
-
+            'productsInProm'=>$productsInProm
         ]);
     }
 

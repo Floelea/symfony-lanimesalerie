@@ -24,25 +24,51 @@ class NewsletterController extends AbstractController
     {
         $input = $request->request->get('newsletter');
 //        dd($input);
-        $base = $newsletterRepository->findOneBy(['email' => $input]);
-//        dd($base->getEmail());
+        $alreadyInBase = $newsletterRepository->findOneBy(['email' => $input]);
+//            dd($alreadyInBase);
 
-
-        if ($base == null) {
-//            dd('ok');
-
-            $newsletter = new Newsletter();
-            $newsletter->setEmail($request->request->get('newsletter'));
-            if ($this->getUser()){
-                $newsletter->addUser($this->getUser());
+        if ($this->getUser()){
+            if ($this->getUser()->getNewsletter() == null ){
+                if ($alreadyInBase == null){
+//                    dd('user pas demail et dans newsletter il ny est pas');
+                        $newsletter = new Newsletter();
+                        $newsletter->setEmail($request->request->get('newsletter'));
+                        $newsletter->addUser($this->getUser());
+                        $manager->persist($newsletter);
+                        $manager->flush();
+                    $this->addFlash(
+                        'success',
+                        " Vous êtes bien inscrit à notre newsletter !" );
+                }else{
+//                    dd('email present dans lentite newsletter');
+                    $this->addFlash(
+                        'warning',
+                        "Cet email est déjà inscrit a notre newsletter, merci d'en saisir un nouveau !" );
+                }
+            }else{
+//                dd('user est deja inscrit');
+                $this->addFlash(
+                    'warning',
+                    'Vous êtes déjà inscrit a notre Newsletter !');
             }
-            $manager->persist($newsletter);
-            $manager->flush();
         }else{
-            dd('email deja inscrit');
+            if ($alreadyInBase == null){
+//                dd('pas user connecte');
+                $newsletter = new Newsletter();
+                $newsletter->setEmail($request->request->get('newsletter'));
+                $manager->persist($newsletter);
+                $manager->flush();
+                $this->addFlash(
+                    'success',
+                    " Vous êtes bien inscrit à notre newsletter !" );
+            }else{
+//                dd('email present dans lentite newsletter');
+                $this->addFlash(
+                    'warning',
+                    "Cet email est déjà inscrit a notre newsletter, merci d'en saisir un nouveau !" );
+            }
         }
         return $this->redirectToRoute('home');
     }
-
 }
-//test
+
