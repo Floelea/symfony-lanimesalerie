@@ -75,14 +75,30 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getQuery()->getResult();
     }
 
-    public function newUserSinceAWeek($week)
+    public function newUserSinceAWeek($criteria)
     {
         return $this->createQueryBuilder('user')
-            ->andWhere('user.createdAt > :week')
-            ->setParameter('week', $week)
+            ->andWhere('user.createdAt > :criteria')
+            ->setParameter('criteria', $criteria)
 //            ->andWhere('user.createdAt < :week')
 //            ->setParameter('week', $week)
             ->orderBy('user.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+
+    public function findByFromDate($date1,$date2)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.createdAt > :val1')
+            ->setParameter('val1', $date1)
+            ->andWhere('u.createdAt < :val2')
+            ->setParameter('val2', $date2)
+            ->orderBy('u.id', 'ASC')
             ->setMaxResults(50)
             ->getQuery()
             ->getResult()

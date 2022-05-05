@@ -45,6 +45,19 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
+    public function findCartByFromDate($date1,$date2)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.createdAt > :val1')
+            ->setParameter('val1', $date1)
+            ->andWhere('c.createdAt < :val2')
+            ->setParameter('val2', $date2)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Cart[] Returns an array of Cart objects
     //  */

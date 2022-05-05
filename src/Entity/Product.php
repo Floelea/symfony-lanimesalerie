@@ -14,7 +14,7 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups('post:read')]
+
 
     private $id;
 
@@ -22,11 +22,11 @@ class Product
     private $priceHt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups('post:read')]
+
     private $name;
 
     #[ORM\Column(type: 'text')]
-    #[Groups('post:read')]
+
     private $description;
 
     #[ORM\ManyToOne(targetEntity: AnimalCategory::class, inversedBy: 'products')]
@@ -49,7 +49,6 @@ class Product
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class)]
     private $orderItems;
-
 
 
     #[ORM\Column(type: 'boolean')]

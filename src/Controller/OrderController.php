@@ -12,7 +12,7 @@ use App\Service\CartService;use Doctrine\ORM\EntityManagerInterface;use Symfony\
 class OrderController extends AbstractController
 {
     #[Route('/order/{id}', name: 'order')]
-    public function new( Address $address, CartService $cartService,Request $request,EntityManagerInterface $manager,SessionInterface $session): Response
+    public function new( Address $address, CartService $cartService,Request $request,EntityManagerInterface $manager): Response
     {
         $order = new Order();
         $form = $this->createForm(OrderType::class,$order);
@@ -35,6 +35,7 @@ class OrderController extends AbstractController
             $cartService->removeCart();
             return $this->redirectToRoute('home');
         }
+
         return $this->renderForm('order/index.html.twig', [
             'cartObject' => $cartService->getCart(),
             'total'=> $cartService->getTotal(),

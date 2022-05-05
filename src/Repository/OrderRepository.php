@@ -45,11 +45,11 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
-    public function newOrder($week)
+    public function newOrder($criteria)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.createdAt > :week')
-            ->setParameter('week', $week)
+            ->andWhere('o.createdAt > :criteria')
+            ->setParameter('criteria', $criteria)
             ->orderBy('o.id', 'ASC')
             ->setMaxResults(50)
             ->getQuery()
@@ -68,6 +68,20 @@ class OrderRepository extends ServiceEntityRepository
             ->setParameter('week', $week)
 //            ->andWhere('user.createdAt < :week')
 //            ->setParameter('week', $week)
+            ->orderBy('o.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findOrderByFromDate($date1,$date2)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.createdAt > :val1')
+            ->setParameter('val1', $date1)
+            ->andWhere('o.createdAt < :val2')
+            ->setParameter('val2', $date2)
             ->orderBy('o.id', 'ASC')
             ->setMaxResults(50)
             ->getQuery()

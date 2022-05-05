@@ -57,13 +57,16 @@ class CartController extends AbstractController
      * @param SessionInterface $session
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeProduct(Product $product,CartService $cartService)
+    public function removeProduct(Product $product,CartService $cartService,EntityManagerInterface $manager)
     {
+        $cart = $cartService->isCartInDataBase();
         if ($product)
         {
             $cartService->removeProduct($product);
-
         }
+        $manager->persist($cart);
+        $manager->flush();
+
         return $this->redirectToRoute('cart');
     }
 
@@ -75,10 +78,9 @@ class CartController extends AbstractController
      */
     public function removeRow(Product $product,CartService $cartService)
     {
-        if ($product){
+        if ($product) {
             $cartService->removeRow($product);
         }
-        $cartService->removeCart();
         return $this->redirectToRoute('cart');
     }
 

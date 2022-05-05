@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Form\UserAddressType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +25,7 @@ class AddressController extends AbstractController
      * @Route("/user/address/new",name="new_user_address")
      * @param Request $request
      * @param EntityManagerInterface $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function new(Request $request, EntityManagerInterface $manager){
         $address = new Address();
@@ -34,8 +35,9 @@ class AddressController extends AbstractController
             $address->setUser($this->getUser());
             $manager->persist($address);
             $manager->flush();
-            return $this->redirectToRoute('app_address');
+            return $this->redirectToRoute('home');
         }
+
         return $this->renderForm('address/new.html.twig',[
             'formUserAddress'=>$form
         ]);
@@ -46,7 +48,7 @@ class AddressController extends AbstractController
      * @param Address $address
      * @param Request $request
      * @param EntityManagerInterface $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function edit(Address $address,Request $request,EntityManagerInterface $manager)
     {
@@ -66,7 +68,7 @@ class AddressController extends AbstractController
      * @Route("/user/address/delete/{id}",name="userAddress_delete")
      * @param Address $address
      * @param EntityManagerInterface $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(Address $address,EntityManagerInterface $manager)
     {

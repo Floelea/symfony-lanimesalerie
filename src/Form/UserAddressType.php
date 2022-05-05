@@ -13,7 +13,6 @@ class UserAddressType extends AbstractType
             ->add('street')
             ->add('postalCode')
             ->add('city')
-
         ;
     }
 

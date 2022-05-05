@@ -6,6 +6,7 @@ use App\Repository\GenderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use MongoDB\BSON\Persistable;
 
 #[ORM\Entity(repositoryClass: GenderRepository::class)]
 class Gender

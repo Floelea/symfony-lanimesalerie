@@ -47,22 +47,30 @@ class CartService
     public function addProduct(Product $product){
         $cart = $this->session->get("cart",[]);
         $productId = $product->getId();
+
+
         if(isset($cart[$productId])){
             $cart[$productId]++;
         }else{
             $cart[$productId]=1;
         }
         $this->session->set("cart",$cart);
+
     }
 
     public function removeProduct(Product $product)
     {
         $productId = $product->getId();
         $cart = $this->session->get("cart", []);
+
         if(isset($cart[$productId])){
             $cart[$productId]--;
+
+
+
             if($cart[$productId] == 0 ){
                 unset($cart[$productId]);
+                $this->removeCart();
             }
         }
         $this->session->set("cart",$cart );
@@ -74,6 +82,9 @@ class CartService
         $productId = $product->getId();
         if (isset($cart[$productId])){
             unset($cart[$productId]);
+            if (!$cart){
+                $this->removeCart();
+            }
         }
         $this->session->set('cart',$cart);
     }

@@ -59,4 +59,19 @@ class ProductSubCategoryController extends AbstractController
             'formSubCategoryEdit'=>$form
         ]);
     }
+
+//    /**
+//     * @Route("/admin/product/subCategory/delete/{id}",name="delete_productSubCategory")
+//     * @param EntityManagerInterface $manager
+//     * @param ProductSubCategory $productSubCategory
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     */
+//    public function delete(EntityManagerInterface $manager, ProductSubCategory $productSubCategory)
+//    {
+//        if ($productSubCategory){
+//            $manager->remove($productSubCategory);
+//            $manager->flush();
+//        }
+//        return $this->redirectToRoute('admin_subCategory');
+//    }
 }
