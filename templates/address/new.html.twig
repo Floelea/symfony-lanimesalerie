@@ -12,14 +12,15 @@
 
         </div>
         <div class="col-10" style="background:linear-gradient(to left top, white,rgb(144, 92, 76));">
+{#                            <p class="text-white fs-5 pb-3 fw-bolder text-uppercase">Nouvelle adresse</p#}
+
             <div class="py-3 registerFrom my-5">
-                <p class="text-white fs-5 pb-3 fw-bolder text-uppercase">Nouvelle adresse</p
                 {{ form_start(formUserAddress) }}
                 {{ form_row(formUserAddress.number) }}
                 {{ form_row(formUserAddress.street) }}
                 {{ form_row(formUserAddress.postalCode) }}
                 {{ form_row(formUserAddress.city) }}
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" class="btn btn-success">Enregistrez</button>
                 {{ form_end(formUserAddress) }}
             </div>
         </div>

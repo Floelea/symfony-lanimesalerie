@@ -41,7 +41,7 @@
                                                                 <td><em>{{ subcategory.animalCategory.name }}</em></td>
                                                                 <td>
                                                                     <a href="{{ path('edit_productSubCategory',{id:subcategory.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                                    <a href="" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                                    <a href="{{ path('delete_productSubCategory',{id:subcategory.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                                                                 </td>
                                                             </tr>
                                                         {% endfor %}
